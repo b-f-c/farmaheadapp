@@ -39,3 +39,9 @@ Start with a fresh database, asks for confirmation if the `-y` arg is not includ
 ```bash
 $ farmahead table dropall -y
 ```
+
+### deployment
+
+```bash
+$ sudo ./INSTALL.sh
+```

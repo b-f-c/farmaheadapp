@@ -9,6 +9,7 @@ migrations/versions
 __pycache__/
 *.py[cod]
 *$py.class
+.vagrant
 
 # C extensions
 *.so

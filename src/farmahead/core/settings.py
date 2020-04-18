@@ -1,4 +1,5 @@
 from farmahead import __version__
+import os
 
 class Settings:
     APP_VERSION = __version__
@@ -26,4 +27,9 @@ class Production(Settings):
     ENV = 'production'
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/farmahead'
+    DB_USERNAME = os.getenv('RDS_USERNAME')
+    DB_PASSWORD = os.getenv('RDS_PASSWORD')
+    DB_HOST = os.getenv('RDS_HOST')
+    DB_PORT = os.getenv('RDS_PORT')
+    DB_NAME = 'farmahead'
+    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
