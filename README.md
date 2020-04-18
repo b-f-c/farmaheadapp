@@ -43,5 +43,15 @@ $ farmahead table dropall -y
 ### deployment
 
 ```bash
+# Clone the repo (must be in the location specified)
+$ git clone https://github.com/b-f-c/farmaheadapi /home/ec2-user/farmaheadapi
+$ cd /home/ec2-user/farmaheadapi
+# Create a virtualenv
+$ python3 -m virtualenv env
+$ source env/bin/activate
+$ python3 -m pip install -e .
+$ psql -c 'CREATE DATABASE farmahead;'
+$ python3 -m farmahead table createall
 $ sudo ./INSTALL.sh
 ```
+You should now be able to `curl localhost/api/version` successfully, as well as access the application on port 80 from the outside.

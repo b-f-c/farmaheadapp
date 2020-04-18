@@ -3,6 +3,7 @@ sudo apt-get install -y \
 	git \
 	tree \
 	python3-minimal \
+	python3-pip \
     vim \
     curl \
 	nginx
