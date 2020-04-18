@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar'
+import {Nav, Navbar, NavDropdown, Form, FormControl, Button} from "react-bootstrap";
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
