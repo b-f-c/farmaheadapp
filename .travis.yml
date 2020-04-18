@@ -1,0 +1,22 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+  - "3.8-dev"
+  - "nightly"
+addons:
+  postgresql: "9.4"
+install:
+  - pip install -r requirements.txt
+  - pip install .
+services: postgresql
+before_script:
+  - psql -c 'create database farmahead_test;' -U postgres
+  - psql -c 'create database farmahead;' -U postgres
+script: farmahead test
+# after_success
+# after_failure:
+# after_script:
+# before_deploy
+# after_deploy
