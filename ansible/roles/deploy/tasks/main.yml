@@ -1,0 +1,45 @@
+---
+- name: Copy deploy key(s) to server
+  become: yes
+  include: 00_keys.yml
+  tags: ['keys']
+
+- name: Install base packages
+  become: yes
+  include: 01_system.yml
+  tags: ['system']
+
+- name: Set environment variables
+  become: yes
+  include: 02_environment.yml
+  tags: ['env']
+
+- name: Create logging facilities
+  become: yes
+  include: 03_logging.yml
+  tags: ['logs']
+
+- name: Configure Postgres
+  become: yes
+  include: 04_database.yml
+  tags: ['database']
+
+- name: Install application
+  become: no
+  include: 05_app.yml
+  tags: ['app']
+
+- name: Migrate database
+  become: no
+  include: 06_migration.yml
+  tags: ['migrate']
+
+- name: Configure Nginx server
+  become: yes
+  include: 07_server.yml
+  tags: ['server']
+
+- name: Test if site is accessable
+  become: no
+  include: 08_test.yml
+  tags: ['test']
