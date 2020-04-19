@@ -4,19 +4,13 @@ from flask import Flask
 
 from farmahead.models import migrate, db
 
-# options: {development,testing,production}
-config_variable_name = 'FLASK_CONFIG_CLASS'
-default_config_class = 'development'
-os.environ.setdefault(config_variable_name, default_config_class)
-
-
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
     if config_cls:
         pass
     else:
         config_cls = os.environ['FLASK_CONFIG_CLASS']
-    app.config.from_object(f'farmahead.core.settings.{config_cls.title()}')
+    app.config.from_object(f'farmahead.core.settings.{config_cls}')
 
     if settings_override:
         app.config.update(settings_override)
