@@ -30,5 +30,5 @@ class Production(Settings):
     DB_USERNAME = os.getenv('RDS_USERNAME')
     DB_PASSWORD = os.getenv('RDS_PASSWORD')
     DB_HOST = os.getenv('RDS_HOST')
-    DB_NAME = os.getenv('DB_NAME')
+    DB_NAME = os.getenv('RDS_NAME', 'farmahead')
     SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
