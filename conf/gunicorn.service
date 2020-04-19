@@ -3,12 +3,12 @@ Description=Gunicorn instance to serve farmaheadapi
 After=network.target
 
 [Service]
-User=ec2-user
+User=brett
 Group=www-data
-WorkingDirectory=/home/ec2-user/farmaheadapi
-EnvironmentFile=/etc/environment
-Environment="PATH=/home/ec2-user/farmaheadapi/env/bin"
-ExecStart=/home/ec2-user/farmaheadapi/env/bin/gunicorn \
+WorkingDirectory=/home/brett/dev/codebuffalo/farmaheadapi
+EnvironmentFile=/home/brett/dev/codebuffalo/farmaheadapi/environment
+Environment="PATH=/home/brett/dev/codebuffalo/farmaheadapi/env/bin"
+ExecStart=/home/brett/dev/codebuffalo/farmaheadapi/env/bin/gunicorn \
           --workers 3 \
           --bind unix:farmaheadapi.sock \
           -m 007 farmahead.core.wsgi:application \
