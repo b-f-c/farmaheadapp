@@ -7,10 +7,13 @@ from farmahead.models import migrate, db
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
     if config_cls:
-        pass
+        loc = 'ARG'
     else:
+        loc = 'ENV'
         config_cls = os.environ['FLASK_CONFIG_CLASS']
-    app.config.from_object(f'farmahead.core.settings.{config_cls}')
+    src = f'farmahead.core.settings.{config_cls}'
+    print(f'{loc}: {src}')
+    app.config.from_object(src)
 
     if settings_override:
         app.config.update(settings_override)
