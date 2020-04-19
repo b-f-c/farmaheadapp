@@ -11,7 +11,7 @@ def create_app(config_cls=None, settings_override=None):
     else:
         loc = 'ENV'
         config_cls = os.environ['FLASK_CONFIG_CLASS']
-    src = f'farmahead.core.settings.{config_cls}'
+    src = f'farmahead.core.settings.{config_cls.title()}'
     print(f'{loc}: {src}')
     app.config.from_object(src)
 
