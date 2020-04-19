@@ -3,33 +3,39 @@ from flask import current_app
 from flask import request, jsonify
 from flask_restful import Resource
 
-from farmahead.models import db, MarketModel, MarketSchema
+from farmahead.models import db, ItemModel, ItemSchema
 from farmahead.utils import reply_success, reply_error, reply_missing
-from farmahead.mock.zips import ZipCodes
 
-schema = MarketSchema()             # dict
-schemas = MarketSchema(many=True)   # list
+schema = ItemSchema()             # dict
+schemas = ItemSchema(many=True)   # list
 
-class MarketResource(Resource):
+
+class ItemResource(Resource):
     '''
-    TABLE:  market
-    MODEL:  models.market.MarketModel
-    SCHEMA: models.market.MarketSchema
+    TABLE:  items
+    MODEL:  models.item.ItemModel
+    SCHEMA: models.item.ItemSchema
 
-    /api/market
-    /api/market?id=1
+    /api/item
+    /api/item?id=1
     '''
 
     @staticmethod
     def get_one(_id):
-        log.debug(f'Querying MarketModel where id={_id}')
-        res = db.session.query(MarketModel).filter_by(id=_id).first()
+        log.debug(f'Querying ItemModel where id={_id}')
+        res = db.session.query(ItemModel).filter_by(id=_id).first()
+        return res
+
+    @staticmethod
+    def filter_by_name(_name):
+        log.debug(f'Querying ItemModel where itemName={_name}')
+        res = db.session.query(ItemModel).filter_by(itemName=_name).first()
         return res
 
     @staticmethod
     def get_all():
-        log.debug(f'Querying MarketModel for all rows')
-        res = db.session.query(MarketModel).all()
+        log.debug(f'Querying ItemModel for all rows')
+        res = db.session.query(ItemModel).all()
         return res
 
     def get(self):
@@ -64,11 +70,3 @@ class MarketResource(Resource):
         # Remove existing item(s)
         log.warning('This route is not yet implemented')
         pass
-
-class MarketByZip(Resource):
-    def get(self, zipcode=None):
-        markets = db.session.query(MarketModel).all()
-        if markets:
-            locatedMarkets = ZipCodes.locateMarkets(markets, zipcode)
-        # Retrieve existing item(s)
-        return reply_success(schema.dump(locatedMarkets))
