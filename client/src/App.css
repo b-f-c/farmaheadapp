@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap');
+
 .App {
 	text-align: center;
 	width: 100vw;
 	height: 100vh;
 	background-color: #27ae60;
+
+	font-family: 'Baloo Paaji 2', cursive;
 }
 
 .App-logo {

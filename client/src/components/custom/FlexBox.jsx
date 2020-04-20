@@ -26,7 +26,19 @@ const _performPad = (pad, children) => {
 
 export default (props) => {
 
-	const { direction, margin, grow = false, pad = {}, style, children } = props
+	const { 
+		direction, 
+		margin, 
+		grow = false, 
+		shrink = false, 
+		pad = {},
+		justify = 'start',
+		align='start',
+		
+		children, 
+		...otherProps 
+	} = props
+
 	let newChildren = (children instanceof Array) && !!children ? children : [children]
 
 	const FlexBox = styled.div`
@@ -34,8 +46,11 @@ export default (props) => {
 		flex-direction: ${direction};
 
 		flex-grow: ${!!grow ? 1 : 0};
-		flex-shrink: true;
+		flex-shrink: ${!!shrink ? 1 : 0};
 		flex-basis: auto;
+
+		justify-content: ${justify};
+		align-items: ${align};
 
 		margin: ${_mapMarginToValue(margin)}
 	`
@@ -43,7 +58,7 @@ export default (props) => {
 	if (newChildren) newChildren = _performPad(pad, newChildren)
 
 	return (
-		<FlexBox style={style}>
+		<FlexBox {...otherProps}>
 			{newChildren}
 		</FlexBox>
 	)
