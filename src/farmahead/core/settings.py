@@ -7,6 +7,8 @@ class Settings:
     HOST = 'localhost'
     PORT = 5000
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LOG_LEVEL = 'INFO'
+    LOG_FILE = 'flask.log'
 
 
 class Development(Settings):
@@ -27,6 +29,8 @@ class Production(Settings):
     ENV = 'Production'
     DEBUG = False
     TESTING = False
+    LOG_LEVEL = 'INFO'
+    LOG_FILE = '~/farmaheadapi/log/flask/flask.log'
     DB_USERNAME = os.getenv('RDS_USERNAME')
     DB_PASSWORD = os.getenv('RDS_PASSWORD')
     DB_HOST = os.getenv('RDS_HOST')
