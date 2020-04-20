@@ -3,12 +3,12 @@
 - name: Template systemd gunicorn config
   template:
     src: templates/gunicorn.j2
-    dest: /etc/systemd/system/{{ app_name }}.service
+    dest: /etc/systemd/system/gunicorn.service
     force: yes
 
 - name: Start systemd app service
   systemd:
-    name: "{{ app_name }}.service"
+    name: gunicorn.service
     state: restarted
     enabled: yes
 

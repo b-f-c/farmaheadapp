@@ -30,7 +30,6 @@ postgres_core:
 
 # application
 wsgi_path: "{{ entry_point }}.core.wsgi"
-flask_port: 5000
 
 log_file_directory: "/home/{{ ansible_ssh_user }}/log"
 flask_log_path: "{{ log_file_directory }}/flask/flask.log"
