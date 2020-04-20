@@ -9,5 +9,6 @@ server {
     location / {
         include proxy_params;
         proxy_pass http://unix:/home/{{ ansible_ssh_user }}/{{ app_name }}/{{ app_name }}.sock;
+        add_header Access-Control-Allow-Origin *;
     }
 }
