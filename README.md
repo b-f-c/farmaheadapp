@@ -40,13 +40,17 @@ $ farmahead --help
 ```bash
 $ farmahead table createall
 $ farmahead runserver
-# now in another terminal, use the api to load some data
-$ python3 scripts/mock_markets.py
 ```
 Start with a fresh database, asks for confirmation if the `-y` arg is not included
 ```bash
 $ farmahead table dropall -y
 ```
+
+### mock data
+Once database is initialized, mock data can be loaded with the farmahead command line tool
+````bash
+$ farmahead mock all
+````
 
 ### deployment configuration for production
 If you are using a production deployment (RDS), your environmental variables must be kept in an environment file that gunicorn can reference and read

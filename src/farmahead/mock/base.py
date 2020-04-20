@@ -1,5 +1,6 @@
 import os
 
+
 class BaseMock(object):
 
     def __init__(self):

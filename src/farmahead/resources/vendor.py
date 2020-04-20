@@ -1,4 +1,6 @@
-import logging; log=logging.getLogger(__name__)
+import logging;
+
+log = logging.getLogger(__name__)
 from flask import current_app
 from flask import request, jsonify
 from flask_restful import Resource
@@ -6,11 +8,12 @@ from flask_restful import Resource
 from farmahead.models import db, VendorModel, VendorSchema, MarketVendorModel
 from farmahead.utils import reply_success, reply_error, reply_missing
 
-schema = VendorSchema()             # dict
-schemas = VendorSchema(many=True)   # list
+schema = VendorSchema()  # dict
+schemas = VendorSchema(many=True)  # list
+
 
 class VendorResource(Resource):
-    '''
+    """
     TABLE:  vendors
     MODEL:  models.vendor.VendorModel
     SCHEMA: models.vendor.VendorSchema
@@ -18,7 +21,7 @@ class VendorResource(Resource):
     /api/vendor
     /api/vendor?id=1
     /api/vendor?market=1
-    '''
+    """
 
     @staticmethod
     def get_one(_id):
@@ -37,7 +40,6 @@ class VendorResource(Resource):
         print(f'Querying VendorModel for ids: ' + str(ids))
         res = db.session.query(VendorModel).filter(VendorModel.id.in_(ids))
         return res
-
 
     def get(self):
         # Retrieve existing vendor(s)
@@ -61,7 +63,7 @@ class VendorResource(Resource):
 
         # Filter on marketId
         if _market:
-            marketVendors = db.session().query(MarketVendorModel).filter_by(marketId = _market)
+            marketVendors = db.session().query(MarketVendorModel).filter_by(marketId=_market)
             vendorIds = [mv.vendorId for mv in marketVendors]
             res = self.get_all_in(vendorIds)
             if not res:

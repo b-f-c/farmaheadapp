@@ -1,8 +1,11 @@
-import logging; log=logging.getLogger(__name__)
+import logging;
+
+log = logging.getLogger(__name__)
 import os
 from flask import Flask
 
 from farmahead.models import migrate, db
+
 
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)

@@ -1,4 +1,6 @@
-import logging; log=logging.getLogger(__name__)
+import logging;
+
+log = logging.getLogger(__name__)
 from .base import db, ma, BaseModel
 from marshmallow import EXCLUDE
 
@@ -7,11 +9,13 @@ from marshmallow import EXCLUDE
     "item": "Asparagus"
     "id": 1
 """
+
+
 class ItemModel(BaseModel):
     __tablename__ = 'items'
-    
-    item =                db.Column(db.String(), nullable=False, unique=True)
-    
+
+    item = db.Column(db.String(), nullable=False, unique=True)
+
 
 class ItemSchema(ma.ModelSchema):
     class Meta:

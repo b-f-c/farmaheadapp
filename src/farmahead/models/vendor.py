@@ -1,4 +1,6 @@
-import logging; log=logging.getLogger(__name__)
+import logging;
+
+log = logging.getLogger(__name__)
 from .base import db, ma, BaseModel
 from marshmallow import EXCLUDE
 
@@ -6,20 +8,20 @@ from marshmallow import EXCLUDE
 class VendorModel(BaseModel):
     __tablename__ = 'vendor'
 
-    vendorName =            db.Column(db.String(), nullable=False)
-    
-    firstName =            db.Column(db.String(), nullable=False)
-    lastName =            db.Column(db.String(), nullable=False)
-    
-    longitude =             db.Column(db.Float(), nullable=True)
-    latitude =              db.Column(db.Float(), nullable=True)
-    
-    locationAddress =       db.Column(db.String(), nullable=True)
+    vendorName = db.Column(db.String(), nullable=False)
 
-    contactEmail =           db.Column(db.String(), nullable=True)
-    contactPhone =          db.Column(db.String(), nullable=True)
+    firstName = db.Column(db.String(), nullable=False)
+    lastName = db.Column(db.String(), nullable=False)
 
-    snapStatus =            db.Column(db.Boolean(), nullable=False)
+    longitude = db.Column(db.Float(), nullable=True)
+    latitude = db.Column(db.Float(), nullable=True)
+
+    locationAddress = db.Column(db.String(), nullable=True)
+
+    contactEmail = db.Column(db.String(), nullable=True)
+    contactPhone = db.Column(db.String(), nullable=True)
+
+    snapStatus = db.Column(db.Boolean(), nullable=False)
 
 
 class VendorSchema(ma.ModelSchema):
@@ -34,8 +36,8 @@ class VendorSchema(ma.ModelSchema):
 class MarketVendorModel(BaseModel):
     __tablename__ = 'marketVendor'
 
-    marketId =            db.Column(db.Integer, db.ForeignKey('market.id'), nullable=False)
-    vendorId =            db.Column(db.Integer, db.ForeignKey('vendor.id'), nullable=False)
+    marketId = db.Column(db.Integer, nullable=False)
+    vendorId = db.Column(db.Integer, nullable=False)
 
 
 class MarketVendorSchema(ma.ModelSchema):

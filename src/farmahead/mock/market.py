@@ -1,9 +1,11 @@
-import json, requests, os
-import pandas as pd
+import json
+import os
+import time
 
 from farmahead.models import db, MarketModel
 from farmahead.resources import MarketResource
 from .base import BaseMock
+
 
 class MarketMock(BaseMock):
 
@@ -25,3 +27,17 @@ class MarketMock(BaseMock):
             if not exists:
                 db.session.add(market)
         db.session.commit()
+
+    def mock_bulk(self):
+        t0 = time.time()
+        data_size = len(self.data)
+        chunk_size = 50
+        for chunk in range(0, data_size, chunk_size+1):
+            db.session.bulk_save_objects(
+                [
+                    MarketModel(**d) for d in self.data[chunk:min(chunk + chunk_size, data_size)]
+                ]
+            )
+        db.session.commit()
+        print("Total time for " + str(data_size) +
+            " market records " + str(time.time() - t0) + " secs")

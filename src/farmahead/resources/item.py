@@ -1,6 +1,5 @@
 import logging; log=logging.getLogger(__name__)
-from flask import current_app
-from flask import request, jsonify
+from flask import request
 from flask_restful import Resource
 
 from farmahead.models import db, ItemModel, ItemSchema
@@ -11,14 +10,14 @@ schemas = ItemSchema(many=True)   # list
 
 
 class ItemResource(Resource):
-    '''
+    """
     TABLE:  items
     MODEL:  models.item.ItemModel
     SCHEMA: models.item.ItemSchema
 
     /api/item
     /api/item?id=1
-    '''
+    """
 
     @staticmethod
     def get_one(_id):

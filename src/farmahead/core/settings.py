@@ -1,6 +1,7 @@
 from farmahead import __version__
 import os
 
+
 class Settings:
     APP_VERSION = __version__
     APPLICATION_ROOT = '/api'
@@ -10,7 +11,7 @@ class Settings:
 
 
 class Development(Settings):
-    ENV='Development'
+    ENV = 'Development'
     DEBUG = True
     TESTING = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/farmahead_dev'

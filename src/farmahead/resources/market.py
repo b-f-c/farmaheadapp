@@ -1,24 +1,26 @@
-import logging; log=logging.getLogger(__name__)
-from flask import current_app
-from flask import request, jsonify
+import logging;
+
+log = logging.getLogger(__name__)
+from flask import request
 from flask_restful import Resource
 
 from farmahead.models import db, MarketModel, MarketSchema
 from farmahead.utils import reply_success, reply_error, reply_missing
-from farmahead.mock.zips import ZipCodes
+from farmahead.utils.zips import ZipCodes
 
-schema = MarketSchema()             # dict
-schemas = MarketSchema(many=True)   # list
+schema = MarketSchema()  # dict
+schemas = MarketSchema(many=True)  # list
+
 
 class MarketResource(Resource):
-    '''
+    """
     TABLE:  market
     MODEL:  models.market.MarketModel
     SCHEMA: models.market.MarketSchema
 
     /api/market
     /api/market?id=1
-    '''
+    """
 
     @staticmethod
     def get_one(_id):
@@ -64,6 +66,7 @@ class MarketResource(Resource):
         # Remove existing item(s)
         log.warning('This route is not yet implemented')
         pass
+
 
 class MarketByZipResource(Resource):
     '''

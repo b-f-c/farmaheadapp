@@ -43,19 +43,19 @@ def all():
 
 @MockCommand.command
 def item():
-    item = ItemMock().mock()
+    ItemMock().mock_bulk()
 
 @MockCommand.command
 def market():
-    MarketMock().mock()
+    MarketMock().mock_bulk()
 
 @MockCommand.command
 def vendor():
-    VendorMock().mock()
+    VendorMock().mock_bulk()
 
 @MockCommand.command
 def marketVendor():
-    MarketVendorMock().mock()
+    MarketVendorMock().mock_bulk()
 
 
 manager = Manager(create_app)
