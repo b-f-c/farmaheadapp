@@ -25,6 +25,8 @@ These are the so-called sub-processes and their tags that can be specified on an
   - `logs`
 - name: Configure Postgres
   - `database`
+- name: Install frontend
+  - `api`
 - name: Install application
   - `app`
 - name: Migrate database

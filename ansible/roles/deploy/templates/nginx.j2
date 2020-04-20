@@ -1,9 +1,27 @@
 server {
     listen 80;
+    server_name localhost;
+    index index.html;
     
+    ## React
     location / {
-        include proxy_params;
-        proxy_pass http://unix:/home/{{ ansible_ssh_user }}/{{ app_name }}/{{ app_name }}.sock;
-        add_header Access-Control-Allow-Origin *;
+        root /usr/share/nginx/html; # path to static assets (JS)
     }
+
+    ## Flask
+    location /api/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8080;
+        
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    
+    add_header Access-Control-Allow-Origin *;
+    add_header Cache-Control no-cache; #(no cache for testing reasons, disable for final build)
+
+    ## https://serverfault.com/questions/920534/nginx-proxy-subdomains-to-other-addresses-and-ports
+    ## https://serverfault.com/questions/950897/nginx-both-serving-static-files-and-reverse-proxy-a-gunicorn-server
 }

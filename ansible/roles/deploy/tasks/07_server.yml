@@ -40,3 +40,9 @@
   ufw:
     rule: allow
     name: Nginx Full
+
+- name: Open firewall (8080)
+  ufw:
+    rule: allow
+    port: '8080'
+    proto: tcp
