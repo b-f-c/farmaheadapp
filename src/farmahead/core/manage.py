@@ -9,7 +9,9 @@ from .app import create_app
 from .commands import PytestCommand, CoverageCommand
 
 from farmahead.models import db, ma
-from farmahead.models import MarketModel, MarketSchema
+from farmahead.models import MarketModel, MarketSchema, MarketVendorModel, VendorModel
+
+from farmahead.mock import ItemMock, MarketMock, VendorMock, MarketVendorMock
 
 
 TableCommand = Manager(usage='Handle creation & removal of tables within database')
@@ -34,6 +36,31 @@ def dropall(confirmed=False):
         db.drop_all()
         print('OK', file=sys.stdout)
 
+MockCommand = Manager(usage="Attempt to insert mock data for models")
+
+@MockCommand.command
+def all():
+    item()
+    market()
+    vendor()
+    marketVendor()
+
+@MockCommand.command
+def item():
+    ItemMock().mock_bulk()
+
+@MockCommand.command
+def market():
+    MarketMock().mock_bulk()
+
+@MockCommand.command
+def vendor():
+    VendorMock().mock_bulk()
+
+@MockCommand.command
+def marketVendor():
+    MarketVendorMock().mock_bulk()
+
 
 manager = Manager(create_app)
 manager.add_option('-c', '--config', dest='config_cls', default=os.getenv('FLASK_CONFIG_CLASS', 'Development'), required=False)
@@ -45,6 +72,8 @@ def shell_context():
         ma=ma,
         MarketModel=MarketModel,
         MarketSchema=MarketSchema,
+        MarketVendorModel=MarketVendorModel,
+        VendorModel=VendorModel
     )
     return context
 
@@ -72,3 +101,4 @@ manager.add_command('db', MigrateCommand)
 manager.add_command('table', TableCommand)
 manager.add_command('test', PytestCommand)
 manager.add_command('coverage', CoverageCommand)
+manager.add_command('mock', MockCommand)

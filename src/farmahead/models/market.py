@@ -4,20 +4,21 @@ from marshmallow import EXCLUDE
 
 """
 {
-    "marketName": "Moravia Farmers' Market",
-    "location": "Kinney Drug Store pkg lot 130 Main St.",
-    "address": "130 Main St",
-    "city": "Moravia",
-    "state": "NY",
-    "zip": 13118,
-    "contact": "Barbara Flynn",
-    "phone": "3154962235",
-    "operationHours": "Thursday  10am-5pm",
-    "operationSeason": "June 4-October 29",
-    "snapStatus": "N",
-    "latitude": 42.71209,
-    "longitude": -76.42079,
-    "marketLink": ""
+    marketName: "Lewis Co. General Hospital Farmers' Market"
+    locationDescription: "7785 N. State St. Lowville, Children's Clinic parking lot"
+    locationAddress: "7785 North State St"
+    locationCity: "Lowville"
+    locationState: "NY"
+    locationZip: 13367
+    contactName: "Tina Schell"
+    contactPhone: "3153765087"
+    operationHours: "Thursday 11am-4pm"
+    operationSeason: "June 11-October 1"
+    snapStatus: "N"
+    latitude: 43.79599
+    longitude: -75.49831999999999
+    marketLink: "http://www.lcgh.net"
+    id: 5
 }
 """
 

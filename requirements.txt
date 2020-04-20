@@ -7,8 +7,10 @@ flask-sqlalchemy
 flask-marshmallow
 marshmallow-sqlalchemy
 psycopg2-binary
+geopy
 gitpython
 gunicorn
+pandas
 requests
 # testing stuff
 pytest
