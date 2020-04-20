@@ -66,7 +66,7 @@ def settings():
     pprint(current_app.config)
 
 
-manager.add_command('runserver', Server())
+manager.add_command('runserver', Server(port=8000))
 manager.add_command('shell', Shell(make_context=shell_context))
 manager.add_command('db', MigrateCommand)
 manager.add_command('table', TableCommand)

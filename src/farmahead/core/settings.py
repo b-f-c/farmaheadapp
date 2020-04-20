@@ -5,7 +5,7 @@ class Settings:
     APP_VERSION = __version__
     APPLICATION_ROOT = '/api'
     HOST = 'localhost'
-    PORT = 5000
+    PORT = 8000
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_LEVEL = 'INFO'
     LOG_FILE = 'flask.log'
