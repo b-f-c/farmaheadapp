@@ -9,14 +9,13 @@ class ItemMock(BaseMock):
 
     def __init__(self):
         BaseMock.__init__(self)
-        self.url = 'item'
         self.data_path = os.path.join(self.data_folder, 'items.csv')
 
     def mock(self):
         data = pd.read_csv(self.data_path)
         for i, row in data.iterrows():
-            item = ItemModel(itemName=row['itemName'], quantity=row['quantity'])
-            exists = ItemResource.filter_by_name(row['itemName'])
+            item = ItemModel(**row)
+            exists = ItemResource.get_one(row['id'])
             if not exists:
                 db.session.add(item)
         db.session.commit()

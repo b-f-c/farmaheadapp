@@ -1,40 +1,40 @@
-itemName,quantity
-Asparagus,2
+item,id
+Asparagus,1
 "Beans, Snap",2
-"Beans, Dry",5
+"Beans, Dry",3
 Beets,4
-Beet Greens,2
-Broccoli,1
-Brussel Sprouts,2
-Cabbage,5
-Carrots,3
-Cauliflower,3
-Celery,4
-Collard Greens,5
-Corn,5
-Cucumbers,5
-Eggplant,3
-Fennel,2
-Herbs,2
-Kale,2
-Lettuce,3
-Leeks,2
-Lima Beans,4
-Mesclun,5
-Onions,2
-Parsnips,2
-Peas,1
-Peppers,4
-Potatoes,4
-Pumpkins,2
-Radishes,1
-Rhubarb,2
-Scallions,3
-Spinach,4
-"Squash, Summer",3
-Zucchini,5
-"Squash, Winter",1
-Swiss Chard,3
-Tomatoes,5
-Turnips,3
-Turnip Greens,2
+Beet Greens,5
+Broccoli,6
+Brussel Sprouts,7
+Cabbage,8
+Carrots,9
+Cauliflower,10
+Celery,11
+Collard Greens,12
+Corn,13
+Cucumbers,14
+Eggplant,15
+Fennel,16
+Herbs,17
+Kale,18
+Lettuce,19
+Leeks,20
+Lima Beans,21
+Mesclun,22
+Onions,23
+Parsnips,24
+Peas,25
+Peppers,26
+Potatoes,27
+Pumpkins,28
+Radishes,29
+Rhubarb,30
+Scallions,31
+Spinach,32
+"Squash, Summer",33
+Zucchini,34
+"Squash, Winter",35
+Swiss Chard,36
+Tomatoes,37
+Turnips,38
+Turnip Greens,39

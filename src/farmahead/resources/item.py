@@ -27,12 +27,6 @@ class ItemResource(Resource):
         return res
 
     @staticmethod
-    def filter_by_name(_name):
-        log.debug(f'Querying ItemModel where itemName={_name}')
-        res = db.session.query(ItemModel).filter_by(itemName=_name).first()
-        return res
-
-    @staticmethod
     def get_all():
         log.debug(f'Querying ItemModel for all rows')
         res = db.session.query(ItemModel).all()

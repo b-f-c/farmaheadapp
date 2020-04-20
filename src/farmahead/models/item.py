@@ -4,14 +4,13 @@ from marshmallow import EXCLUDE
 
 """
 {
-    "itemName": "Asparagus"
-    "quantity": "Low"
+    "item": "Asparagus"
+    "id": 1
 """
 class ItemModel(BaseModel):
     __tablename__ = 'items'
     
-    itemName =            db.Column(db.String(), nullable=False, unique=True)
-    quantity =            db.Column(db.Integer, default='')
+    item =                db.Column(db.String(), nullable=False, unique=True)
     
 
 class ItemSchema(ma.ModelSchema):

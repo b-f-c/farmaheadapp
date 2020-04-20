@@ -66,9 +66,25 @@ class MarketResource(Resource):
         pass
 
 class MarketByZip(Resource):
+    '''
+    TABLE:  market
+    MODEL:  models.market.MarketModel
+    SCHEMA: models.market.MarketSchema
+
+    /api/market/zipcode/{zipcode}
+    '''
+
     def get(self, zipcode=None):
+        _distance = request.args.get('distance')
+
+        # Validate distance is integer
+        if _distance:
+            try:
+                _distance = int(_distance)
+            except ValueError:
+                return reply_error(message="Distance must be integer")
+
+        # Pass all markets into distance filter
         markets = db.session.query(MarketModel).all()
-        if markets:
-            locatedMarkets = ZipCodes.locateMarkets(markets, zipcode)
-        # Retrieve existing item(s)
-        return reply_success(schema.dump(locatedMarkets))
+        locatedMarkets = ZipCodes().locateMarkets(markets, zipcode, _distance)
+        return reply_success(schemas.dump(locatedMarkets))
