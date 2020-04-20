@@ -5,7 +5,8 @@ import farmahead
 from farmahead.models import db, MarketModel
 
 data = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data')
-url = 'http://localhost/api/market'
+
+url = 'http://localhost:8000/api/market'
 
 with open(os.path.join(data, 'markets.json'), 'r') as file:
     obj = json.load(file)

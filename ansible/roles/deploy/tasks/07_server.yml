@@ -3,32 +3,38 @@
 - name: Template systemd gunicorn config
   template:
     src: templates/gunicorn.j2
-    dest: /etc/systemd/system/{{ app_name }}.service
+    dest: /etc/systemd/system/gunicorn.service
     force: yes
 
 - name: Start systemd app service
   systemd:
-    name: "{{ app_name }}.service"
+    name: gunicorn.service
     state: restarted
     enabled: yes
 
-- name: Template nginx site config
+- name: Template nginx global config
   template:
     src: templates/nginx.j2
-    dest: /etc/nginx/sites-available/{{ app_name }}.conf
+    dest: /etc/nginx/nginx.conf
     force: yes
 
-- name: Remove existing nginx site config
-  file:
-    path: /etc/nginx/sites-enabled/default
-    state: absent
-
-- name: Enable nginx site
-  file:
-    src: /etc/nginx/sites-available/{{ app_name }}.conf
-    dest: /etc/nginx/sites-enabled/default
-    state: link
+- name: Template nginx site config
+  template:
+    src: templates/site.j2
+    dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
+
+# - name: Remove existing nginx site config
+#   file:
+#     path: /etc/nginx/sites-enabled/default
+#     state: absent
+
+# - name: Enable nginx site
+#   file:
+#     src: /etc/nginx/sites-available/{{ app_name }}.conf
+#     dest: /etc/nginx/sites-enabled/default
+#     state: link
+#     force: yes
 
 - name: Restart nginx
   systemd:
