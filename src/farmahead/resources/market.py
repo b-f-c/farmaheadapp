@@ -65,7 +65,7 @@ class MarketResource(Resource):
         log.warning('This route is not yet implemented')
         pass
 
-class MarketByZip(Resource):
+class MarketByZipResource(Resource):
     '''
     TABLE:  market
     MODEL:  models.market.MarketModel
