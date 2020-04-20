@@ -64,3 +64,8 @@ os_environment:
 
   - key: LC_CTYPE
     value: "C.UTF-8"
+
+  # we need to include this so that git-python can access the commit hash,
+  # and since we are locking down our path to the venv we lose /usr/bin/
+  - key: GIT_PYTHON_GIT_EXECUTABLE
+    value: "/usr/bin/git"
