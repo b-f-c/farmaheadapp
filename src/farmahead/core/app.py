@@ -45,6 +45,8 @@ def on_startup(app, *args, **kwargs):
 def setup_logging(app):
     if not app.debug:
         from logging import FileHandler
-        handler = FileHandler('flask.log')
-        handler.setLevel(logging.DEBUG)
+        file = app.config.get('LOG_FILE', 'flask.log')
+        level = app.config.get('LOG_LEVEL', 'INFO')
+        handler = FileHandler(file)
+        handler.setLevel(getattr(logging, level, logging.INFO))
         app.logger.addHandler(handler)

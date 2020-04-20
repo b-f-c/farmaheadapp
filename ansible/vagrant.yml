@@ -1,0 +1,7 @@
+---
+- name: Execute Vagrant deployment roles
+  hosts: default
+  become: yes
+  gather_facts: False
+  roles:
+    - role: deploy
