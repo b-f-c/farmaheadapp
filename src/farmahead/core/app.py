@@ -14,6 +14,7 @@ def create_app(config_cls=None, settings_override=None):
     src = f'farmahead.core.settings.{config_cls.title()}'
     print(f'{loc}: {src}')
     app.config.from_object(src)
+    app.url_map.strict_slashes = False  # dont require trailing slashes
 
     if settings_override:
         app.config.update(settings_override)

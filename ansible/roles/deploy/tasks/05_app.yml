@@ -16,9 +16,11 @@
     requirements: /home/{{ ansible_ssh_user }}/{{ app_name }}/requirements.txt
     virtualenv: /home/{{ ansible_ssh_user }}/{{ app_name }}/env
     virtualenv_python: python3
+  become_user: "{{ ansible_ssh_user }}"
 
 - name: Install {{ app_name }} source
   pip:
     name: /home/{{ ansible_ssh_user }}/{{ app_name }}
     extra_args: '-e'   # installs editably
     virtualenv: /home/{{ ansible_ssh_user }}/{{ app_name }}/env
+  become_user: "{{ ansible_ssh_user }}"

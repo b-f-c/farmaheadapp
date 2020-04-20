@@ -8,7 +8,6 @@ from flask_restful import Resource
 class VersionResource(Resource):
     def get(self):
         import git
-        os.environ['GIT_PYTHON_GIT_EXECUTABLE'] = '/usr/bin/git'
         repo = git.Repo(search_parent_directories=True)
         sha = repo.head.object.hexsha
         env = current_app.config.get('ENV')
