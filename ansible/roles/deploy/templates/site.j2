@@ -1,0 +1,31 @@
+server {
+    listen 80;
+    server_name 127.0.0.1;
+    index index.html;
+    
+    ## React
+    location / {
+        root /usr/share/nginx/html; #(path to JS build)
+    }
+
+    ## Flask
+    location /api/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8000/api/;  #(MUST REMAIN 8000)
+        
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    ## Reduce log clutter
+    location = /favicon.ico {
+        return 204;  #(no content)
+        access_log     off;
+        log_not_found  off;
+    }
+    
+    add_header Access-Control-Allow-Origin *;
+    add_header Cache-Control no-cache; #(no cache for testing reasons, disable for final build)
+}
