@@ -61,3 +61,6 @@ os_environment:
 
   - key: LC_ALL
     value: "C.UTF-8"
+
+  - key: LC_CTYPE
+    value: "C.UTF-8"
