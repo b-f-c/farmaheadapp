@@ -55,3 +55,9 @@ os_environment:
 
   - key: LOG_FILE
     value: "{{ flask_log_path }}"
+
+  - key: LOG_LEVEL
+    value: "{{ flask_log_level }}"
+
+  - key: LC_ALL
+    value: "C.UTF-8"

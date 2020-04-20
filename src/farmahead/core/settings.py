@@ -29,8 +29,8 @@ class Production(Settings):
     ENV = 'Production'
     DEBUG = False
     TESTING = False
-    LOG_LEVEL = 'INFO'
-    LOG_FILE = '~/farmaheadapi/log/flask/flask.log'
+    LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+    LOG_FILE = os.getenv('LOG_FILE', 'flask.log')
     DB_USERNAME = os.getenv('RDS_USERNAME')
     DB_PASSWORD = os.getenv('RDS_PASSWORD')
     DB_HOST = os.getenv('RDS_HOST')
