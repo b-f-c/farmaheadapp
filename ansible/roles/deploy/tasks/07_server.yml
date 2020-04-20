@@ -12,23 +12,29 @@
     state: restarted
     enabled: yes
 
-- name: Template nginx site config
+- name: Template nginx global config
   template:
     src: templates/nginx.j2
-    dest: /etc/nginx/sites-available/{{ app_name }}.conf
+    dest: /etc/nginx/nginx.conf
     force: yes
 
-- name: Remove existing nginx site config
-  file:
-    path: /etc/nginx/sites-enabled/default
-    state: absent
-
-- name: Enable nginx site
-  file:
-    src: /etc/nginx/sites-available/{{ app_name }}.conf
-    dest: /etc/nginx/sites-enabled/default
-    state: link
+- name: Template nginx site config
+  template:
+    src: templates/site.j2
+    dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
+
+# - name: Remove existing nginx site config
+#   file:
+#     path: /etc/nginx/sites-enabled/default
+#     state: absent
+
+# - name: Enable nginx site
+#   file:
+#     src: /etc/nginx/sites-available/{{ app_name }}.conf
+#     dest: /etc/nginx/sites-enabled/default
+#     state: link
+#     force: yes
 
 - name: Restart nginx
   systemd:
@@ -41,8 +47,7 @@
     rule: allow
     name: Nginx Full
 
-- name: Open firewall (8080)
-  ufw:
-    rule: allow
-    port: '8080'
-    proto: tcp
+# - name: Open firewall (8080)
+#   ufw:
+#     rule: allow
+#     port: '8080'
