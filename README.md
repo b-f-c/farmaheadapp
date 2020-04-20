@@ -60,7 +60,7 @@ FLASK_CONFIG_CLASS=Production
 RDS_HOST=the-rds-host
 RDS_USERNAME=postgres
 RDS_PASSWORD=potgres'-password
-DB_NAME=the-db-name
+RDS_NAME=the-db-name
 ```
 
 ### deployment configuration for all
