@@ -7,7 +7,7 @@ from tests.client import ApiTestingResponse
 
 @pytest.yield_fixture(scope='session')
 def app():
-    app = create_app(config_cls='testing')
+    app = create_app(config_cls='Testing')
     app.response_class = ApiTestingResponse
     ctx = app.app_context()
     ctx.push()

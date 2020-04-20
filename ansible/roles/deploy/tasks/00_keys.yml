@@ -1,0 +1,41 @@
+---
+- name: Ensure ssh directory has correct permissions.
+  file:
+    path: /home/{{ ansible_ssh_user }}/.ssh/
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: Ensure .ssh directory exists.
+  file:
+    path: /home/{{ ansible_ssh_user }}/.ssh/
+    state: directory
+    mode: 0700
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: Ensure GitHub deploy private key is present on the server.
+  become: true
+  copy:
+    src: "{{ deploy_private_key }}"
+    dest: /home/{{ ansible_ssh_user }}/.ssh/deploy_key
+    mode: 0600
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: Ensure GitHub deploy public key is present on the server.
+  become: true
+  copy:
+    src: "{{ deploy_public_key }}"
+    dest: /home/{{ ansible_ssh_user }}/.ssh/deploy_key.pub
+    mode: 0644
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+# See: https://stackoverflow.com/a/37096534/100134
+- name: Ensure setfacl support is present.
+  apt:
+    name: acl
+    state: latest
+    update_cache: yes
+    force_apt_get: true

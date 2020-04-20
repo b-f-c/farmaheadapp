@@ -18,19 +18,23 @@ TableCommand = Manager(usage='Handle creation & removal of tables within databas
 
 @TableCommand.command
 def createall():
-    # creates all tables within the datbase
+    '''
+    Create all necessary tables within the database. Database must already exist.
+    '''
     db.create_all()
-    return 'OK'
+    print('OK', file=sys.stdout)
 
 
 @TableCommand.option('-y', dest='confirmed', action='store_true', default=False,
     help='Bypass interactive confirmation prompt and drop all table data')
 def dropall(confirmed=False):
-    # creates all tables within the datbase
+    '''
+    Remove all existing data from the database tables. Cannot be undone.
+    '''
     print(f'Dropping database: {str(db.engine.url)}', file=sys.stdout)
     if confirmed or prompt_bool('Are you sure you want to lose all your data', default=False):
         db.drop_all()
-        return 'OK'
+        print('OK', file=sys.stdout)
 
 MockCommand = Manager(usage="Attempt to insert mock data for models")
 
@@ -59,7 +63,7 @@ def marketVendor():
 
 
 manager = Manager(create_app)
-manager.add_option('-c', '--config', dest='config_cls', required=False)
+manager.add_option('-c', '--config', dest='config_cls', default=os.getenv('FLASK_CONFIG_CLASS', 'Development'), required=False)
 
 def shell_context():
     context = dict(
@@ -76,11 +80,17 @@ def shell_context():
 
 @manager.command
 def version():
+    '''
+    Print the current version as specified with 'APP_VERSION' config value.
+    '''
     print(__version__, file=sys.stdout)
 
 
 @manager.command
 def settings():
+    '''
+    Print the current app settings for the environment.
+    '''
     from pprint import pprint
     pprint(current_app.config)
 
@@ -92,6 +102,3 @@ manager.add_command('table', TableCommand)
 manager.add_command('test', PytestCommand)
 manager.add_command('coverage', CoverageCommand)
 manager.add_command('mock', MockCommand)
-
-if __name__ == '__main__':
-    manager.run()

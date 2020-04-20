@@ -18,7 +18,7 @@ setup(
     package_dir={"": "src"},
     entry_points={
         "console_scripts": [
-            "farmahead=farmahead.core.manage:manager.run",
+            "farmahead=farmahead.__main__:main",
         ]
     }
 )

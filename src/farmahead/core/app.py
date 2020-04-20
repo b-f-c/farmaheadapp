@@ -10,10 +10,14 @@ from farmahead.models import migrate, db
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
     if config_cls:
-        pass
+        loc = 'ARG'
     else:
+        loc = 'ENV'
         config_cls = os.environ['FLASK_CONFIG_CLASS']
-    app.config.from_object(f'farmahead.core.settings.{config_cls}')
+    src = f'farmahead.core.settings.{config_cls.title()}'
+    print(f'{loc}: {src}')
+    app.config.from_object(src)
+    app.url_map.strict_slashes = False  # dont require trailing slashes
 
     if settings_override:
         app.config.update(settings_override)
@@ -45,6 +49,8 @@ def on_startup(app, *args, **kwargs):
 def setup_logging(app):
     if not app.debug:
         from logging import FileHandler
-        handler = FileHandler('flask.log')
-        handler.setLevel(logging.DEBUG)
+        file = app.config.get('LOG_FILE', 'flask.log')
+        level = app.config.get('LOG_LEVEL', 'INFO')
+        handler = FileHandler(file)
+        handler.setLevel(getattr(logging, level, logging.INFO))
         app.logger.addHandler(handler)

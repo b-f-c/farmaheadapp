@@ -1,0 +1,71 @@
+---
+# defaults file for deploy
+
+# application source code
+repo_url: git@github.com:{{ github_user }}/{{ app_name }}.git
+
+# system packages
+packages:
+  - python3-pip
+  - python3-dev
+  - git
+  - tree
+  - nginx
+  - vim
+
+pip_core:
+  - pip
+  - setuptools
+  - wheel
+
+python_core:
+  - virtualenv
+  - requests
+
+postgres_core:
+  - postgresql
+  - postgresql-contrib
+  - postgresql-client-common
+  - python3-psycopg2
+
+# application
+wsgi_path: "{{ entry_point }}.core.wsgi"
+
+log_file_directory: "/home/{{ ansible_ssh_user }}/log"
+flask_log_path: "{{ log_file_directory }}/flask/flask.log"
+gunicorn_error_log: "{{ log_file_directory }}/gunicorn/gunicorn-error.log"
+gunicorn_access_log: "{{ log_file_directory }}/gunicorn/gunicorn-access.log"
+
+# environment variables
+os_environment:
+  - key: RDS_USERNAME
+    value: "{{ postgres_user }}"
+
+  - key: RDS_PASSWORD
+    value: "{{ postgres_password }}"
+
+  - key: RDS_HOST
+    value: "{{ postgres_host }}"
+
+  - key: RDS_NAME
+    value: "{{ postgres_database }}"
+
+  - key: FLASK_CONFIG_CLASS
+    value: "{{ flask_config_class }}"
+
+  - key: LOG_FILE
+    value: "{{ flask_log_path }}"
+
+  - key: LOG_LEVEL
+    value: "{{ flask_log_level }}"
+
+  - key: LC_ALL
+    value: "C.UTF-8"
+
+  - key: LC_CTYPE
+    value: "C.UTF-8"
+
+  # we need to include this so that git-python can access the commit hash,
+  # and since we are locking down our path to the venv we lose /usr/bin/
+  - key: GIT_PYTHON_GIT_EXECUTABLE
+    value: "/usr/bin/git"
