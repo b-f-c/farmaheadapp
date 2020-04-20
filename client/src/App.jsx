@@ -7,18 +7,24 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {
-  Nav, Navbar, NavDropdown, Form, FormControl, Button,
-} from 'react-bootstrap';
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import logo from './logo.svg';
+import Selection from './Components/Selection';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/">
+            <div style={{ position: 'absolute', zIndex: 2 }}>
+              <h1 style={{ textAlign: 'center' }}>Farm Ahead</h1>
+              <img src={logo} className="App-logo" alt="logo" />
+              <Selection />
+            </div>
+            <div className="App-background" />
+          </Route>
           <Route path="/foo">
             <div>foo</div>
           </Route>
