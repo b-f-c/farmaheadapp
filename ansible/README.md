@@ -51,12 +51,12 @@ Examples
 
 `Complete installation`
 ```bash
-$ ansible-playbook --inventory hosts/webserver.ini --extra-vars "git_branch=master"
+$ ansible-playbook deploy.yml --inventory hosts/webserver.ini --extra-vars "git_branch=master"
 ```
 
 `Update app`
 ```bash
-$ ansible-playbook --inventory hosts/webserver.ini --extra-vars "git_branch=master" --tags "app, migrate, server, test"
+$ ansible-playbook deploy.yml --inventory hosts/webserver.ini --extra-vars "git_branch=master" --tags "app, migrate, server, test"
 ```
 
 
