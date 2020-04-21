@@ -1,17 +1,12 @@
-.App {
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap');
 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  
+.App {
+	text-align: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: #27ae60;
+
+	font-family: 'Baloo Paaji 2', cursive;
 }
 
 .App-logo {
@@ -40,8 +35,13 @@
   justify-content: center;
 }
 
+.App-login-container {
+  display: flex;
+  justify-content: center;
+}
+
 .App-link {
-  color: #61dafb;
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {

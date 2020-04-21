@@ -1,31 +1,35 @@
-import React from 'react';
+import React from 'react'
 import {
   Navbar, Form, FormControl, Button,
-} from 'react-bootstrap';
+} from 'react-bootstrap'
 
-const Selection = () => (
-  <Navbar bg="light" expand="lg">
+const Selection = () => {
+  const SHOPPER = 'I am a shopper'
+  const VENDOR = 'I am a vendor'
+  const SPECIFIC_PRODUCE = 'Looking for specific produce'
+  const SHOPPING_LOCATIONS = 'Looking for shopping Locations'
+  const handleChange = (e) => e.target.value
+
+  return (
     <Form inline>
       <Form.Row>
         <Form.Group controlId="formUser">
-          <Form.Control as="select" value="I am a...">
-            <option>Shopper</option>
-            <option>Farmer</option>
+          <Form.Control as="select" onChange={handleChange}>
+            <option value={SHOPPER}>{SHOPPER}</option>
+            <option value={VENDOR}>{VENDOR}</option>
           </Form.Control>
         </Form.Group>
       </Form.Row>
       <Form.Row>
         <Form.Group controlId="formOption">
-          <Form.Control as="select" value="Looking for...">
-            <option>Specific Produce</option>
-            <option>Shopping Locations</option>
+          <Form.Control as="select" onChange={handleChange}>
+            <option value={SPECIFIC_PRODUCE}>{SPECIFIC_PRODUCE}</option>
+            <option value={SHOPPING_LOCATIONS}>{SHOPPING_LOCATIONS}</option>
           </Form.Control>
         </Form.Group>
       </Form.Row>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
     </Form>
-  </Navbar>
-);
+  )
+}
 
-export default Selection;
+export default Selection
