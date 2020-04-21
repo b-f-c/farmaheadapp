@@ -1,4 +1,5 @@
 from .base import migrate, db, ma
 from .market import MarketModel, MarketSchema
-from .item import ItemModel, ItemSchema
-from .vendor import VendorModel, VendorSchema, MarketVendorModel, MarketVendorSchema
+from .produce import ProduceModel, ProduceSchema
+from .vendor import VendorModel, VendorSchema, MarketVendorModel, \
+    MarketVendorSchema, VendorProduceModel, VendorProduceSchema

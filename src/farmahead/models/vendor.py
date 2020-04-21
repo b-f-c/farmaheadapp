@@ -6,6 +6,9 @@ from marshmallow import EXCLUDE
 
 
 class VendorModel(BaseModel):
+    """
+    Vendors who sell produce or other goods
+    """
     __tablename__ = 'vendor'
 
     vendorName = db.Column(db.String(), nullable=False)
@@ -33,7 +36,28 @@ class VendorSchema(ma.ModelSchema):
     # fine 99% of the time unless you need to implement adhoc validation, etc.
 
 
+class VendorProduceModel(BaseModel):
+    """
+    Bisect between vendors and produce
+    """
+    __tablename__ = 'vendorProduce'
+
+    produceId = db.Column(db.Integer, nullable=False)
+    vendorId = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+
+class VendorProduceSchema(ma.ModelSchema):
+    class Meta:
+        model = VendorProduceModel
+        unknown = EXCLUDE
+        strict = False
+
+
 class MarketVendorModel(BaseModel):
+    """
+    Bisect between vendors and markets
+    """
     __tablename__ = 'marketVendor'
 
     marketId = db.Column(db.Integer, nullable=False)

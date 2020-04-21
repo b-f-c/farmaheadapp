@@ -1,12 +1,12 @@
 import logging;
 
 log = logging.getLogger(__name__)
-from flask import current_app
-from flask import request, jsonify
-from flask_restful import Resource
+from flask import request
+from flask_restful import Resource, reqparse
 
-from farmahead.models import db, VendorModel, VendorSchema, MarketVendorModel
-from farmahead.utils import reply_success, reply_error, reply_missing
+from farmahead.models import db, VendorModel, VendorSchema, MarketVendorModel, VendorProduceModel
+from farmahead.utils import reply_success, reply_error, reply_missing, ZipCodes, ValidateParameters
+from farmahead.utils.exceptions import *
 
 schema = VendorSchema()  # dict
 schemas = VendorSchema(many=True)  # list
@@ -92,3 +92,59 @@ class VendorResource(Resource):
         # Remove existing vendor(s)
         log.warning('This route is not yet implemented')
         pass
+
+
+class VendorByProduceResource(Resource):
+    """
+    /api/vendor/<int:id>/produce
+    """
+
+    def get(self, id=None):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('distance', type=int, ignore=False)
+        parser.add_argument('zipcode', type=int, ignore=False)
+        args = parser.parse_args()
+
+        _ids = args.get('ids')
+        _distance = args.get('distance')
+        _zipcode = args.get('zipcode')
+
+        produceVendors = db.session().query(VendorProduceModel, VendorModel) \
+            .filter_by(produceId=id) \
+            .join(VendorModel, VendorProduceModel.vendorId == VendorModel.id)
+
+        vendors = [v for vp, v in produceVendors]
+        if _zipcode:
+            vendors = ZipCodes().locateThings(vendors, int(_zipcode), _distance)
+        return reply_success(schemas.dump(vendors))
+
+
+class VendorByProduceListResource(Resource):
+    """
+    /api/vendor/produce/multiOr
+    """
+
+    def get(self, ids=None):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', type=int, required=True, action='append', ignore=False)
+        parser.add_argument('distance', type=int, ignore=False)
+        parser.add_argument('zipcode', type=int, ignore=False)
+        args = parser.parse_args()
+
+        _ids = args['id']
+        _zipcode = args['zipcode']
+        _distance = args['distance']
+
+        produceVendors = db.session().query(VendorProduceModel, VendorModel) \
+            .filter(VendorProduceModel.produceId.in_(_ids)) \
+            .join(VendorModel, VendorProduceModel.vendorId == VendorModel.id)
+
+        vendors = [v for vp, v in produceVendors]
+
+        if _zipcode:
+            vendors = ZipCodes().locateThings(vendors, int(_zipcode), _distance)
+
+        return reply_success(schemas.dump(vendors))
+

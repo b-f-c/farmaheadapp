@@ -1,12 +1,16 @@
-import logging;
+import logging
+
+from farmahead.utils.exceptions import ParamTypeException
+
+from flask import request
+from flask_restful import Resource, reqparse
+
+from farmahead.models import db, MarketModel, MarketSchema, VendorProduceModel, VendorModel, MarketVendorModel
+from farmahead.utils import reply_success, reply_error, reply_missing, ValidateParameters
+from farmahead.utils.zips import ZipCodes
 
 log = logging.getLogger(__name__)
-from flask import request
-from flask_restful import Resource
 
-from farmahead.models import db, MarketModel, MarketSchema
-from farmahead.utils import reply_success, reply_error, reply_missing
-from farmahead.utils.zips import ZipCodes
 
 schema = MarketSchema()  # dict
 schemas = MarketSchema(many=True)  # list
@@ -69,25 +73,69 @@ class MarketResource(Resource):
 
 
 class MarketByZipResource(Resource):
-    '''
+    """
     TABLE:  market
     MODEL:  models.market.MarketModel
     SCHEMA: models.market.MarketSchema
 
     /api/market/zipcode/{zipcode}
-    '''
+    """
 
     def get(self, zipcode=None):
-        _distance = request.args.get('distance')
+        parser = reqparse.RequestParser()
+        parser.add_argument('zipcode', type=int, ignore=False)
+        args = parser.parse_args()
 
-        # Validate distance is integer
-        if _distance:
-            try:
-                _distance = int(_distance)
-            except ValueError:
-                return reply_error(message="Distance must be integer")
+        _distance = args.get('distance')
 
         # Pass all markets into distance filter
         markets = db.session.query(MarketModel).all()
-        locatedMarkets = ZipCodes().locateMarkets(markets, zipcode, _distance)
+        locatedMarkets = ZipCodes().locateThings(markets, zipcode, _distance)
         return reply_success(schemas.dump(locatedMarkets))
+
+
+class MarketByProduceResource(Resource):
+    """
+    /api/produce/<int:id>/market
+    """
+
+    def get(self, id=None):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('distance', type=int, ignore=False)
+        parser.add_argument('zipcode', type=int, ignore=False)
+        args = parser.parse_args()
+
+        _zipcode = args['zipcode']
+        _distance = args['distance']
+
+        produceMarkets = db.session().query(VendorProduceModel, VendorModel, MarketVendorModel, MarketModel) \
+            .filter_by(produceId=id) \
+            .join(VendorModel, VendorProduceModel.vendorId == VendorModel.id) \
+            .join(MarketVendorModel, MarketVendorModel.vendorId == VendorProduceModel.vendorId) \
+            .join(MarketModel, MarketVendorModel.marketId == MarketModel.id)
+
+        if not _zipcode:
+            markets = [{
+                        "produceId": id,
+                        "marketName": m.marketName,
+                        "marketId": m.id,
+                        "vendorName": v.vendorName,
+                        "vendorId": v.id
+                        }
+                for vp, v, mv, m in produceMarkets]
+            return reply_success(markets)
+        else:
+            markets = [m for vp, v, mv, m in produceMarkets]
+            locatedMarkets = ZipCodes().locateThings(markets, _zipcode, _distance)
+            locatedMarketIds = [lm.id for lm in locatedMarkets]
+            returnMarkets = [{
+                        "produceId": id,
+                        "marketName": m.marketName,
+                        "marketId": m.id,
+                        "vendorName": v.vendorName,
+                        "vendorId": v.id
+                        }
+                for vp, v, mv, m in produceMarkets if m.id in locatedMarketIds]
+            return reply_success(returnMarkets)
+
