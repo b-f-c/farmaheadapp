@@ -1,7 +1,7 @@
 from .base import api, bp
 from .index import IndexResource
 from .version import VersionResource
-from .market import MarketResource, MarketByZipResource
+from .market import MarketResource, MarketByZipResource, MarketByProduceResource
 from .produce import ProduceResource, ProduceByVendorResource
 from .vendor import VendorResource, VendorByProduceResource, VendorByProduceListResource
 
@@ -28,6 +28,12 @@ api.add_resource(ProduceByVendorResource, '/vendor/<int:id>/produce')
 # @param: zipcode (int): optional - zip code to search by (will use centroid of zipcode)
 # example - http://127.0.0.1:8000/api/produce/5/vendor?zipcode=14217&distance=15
 api.add_resource(VendorByProduceResource, '/produce/<int:id>/vendor')
+
+# Get markets associated with a produce
+# @param: distance (int): optional - radius search with zipcode LAT/LONG
+# @param: zipcode (int): optional - zip code to search by (will use centroid of zipcode)
+# example - http://127.0.0.1:8000/api/produce/5/vendor?zipcode=14217&distance=15
+api.add_resource(MarketByProduceResource, '/produce/<int:id>/market')
 
 # Get vendors associated with a list of produce
 # @param: id (id): required, multiple allowed - produce to search by
