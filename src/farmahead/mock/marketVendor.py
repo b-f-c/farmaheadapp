@@ -27,16 +27,18 @@ class MarketVendorMock(BaseMock):
                 db.session.add(marketVendor)
         db.session.commit()
 
-    def mock_bulk(self):
+    def mock_bulk(self, chunk_size:int = 1000):
         t0 = time.time()
         data_size = len(self.data)
-        chunk_size = 50
-        for chunk in range(0, data_size, chunk_size+1):
-            db.session.bulk_save_objects(
-                [
-                    MarketVendorModel(**d) for d in self.data[chunk:min(chunk + chunk_size, data_size)]
-                ]
-            )
+        for chunk in range(0, data_size + 1, chunk_size):
+            try:
+                db.session.bulk_save_objects(
+                    [
+                        MarketVendorModel(**d) for d in self.data[chunk:min(chunk + chunk_size, data_size)]
+                    ]
+                )
+            except Exception as e:
+                pass
         db.session.commit()
         print("Total time for " + str(data_size) +
             " marketVendor records " + str(time.time() - t0) + " secs")

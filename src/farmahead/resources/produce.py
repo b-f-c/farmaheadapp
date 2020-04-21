@@ -1,12 +1,14 @@
-import logging; log=logging.getLogger(__name__)
+import logging;
+
+log = logging.getLogger(__name__)
 from flask import request
 from flask_restful import Resource
 
-from farmahead.models import db, ProduceModel, ProduceSchema
+from farmahead.models import db, ProduceModel, ProduceSchema, VendorProduceModel
 from farmahead.utils import reply_success, reply_error, reply_missing
 
-schema = ProduceSchema()             # dict
-schemas = ProduceSchema(many=True)   # list
+schema = ProduceSchema()  # dict
+schemas = ProduceSchema(many=True)  # list
 
 
 class ProduceResource(Resource):
@@ -29,6 +31,12 @@ class ProduceResource(Resource):
     def get_all():
         log.debug(f'Querying ProduceModel for all rows')
         res = db.session.query(ProduceModel).all()
+        return res
+
+    @staticmethod
+    def get_all_in(ids):
+        print(f'Querying VendorModel for ids: ' + str(ids))
+        res = db.session.query(ProduceModel).filter(ProduceModel.id.in_(ids))
         return res
 
     def get(self):
@@ -63,3 +71,24 @@ class ProduceResource(Resource):
         # Remove existing item(s)
         log.warning('This route is not yet implemented')
         pass
+
+
+class ProduceByVendorResource(Resource):
+    """
+    /api/vendor/<int:id>/produce
+    """
+
+    def get(self, id=None):
+        vendorProduce = db.session().query(VendorProduceModel, ProduceModel) \
+            .filter_by(vendorId=id) \
+            .join(ProduceModel, VendorProduceModel.produceId == ProduceModel.id)
+        produce = [{
+                    "produceId": vp.produceId,
+                    "quantity": vp.quantity,
+                    "produceName": p.produceName,
+                    "produceType": p.produceType
+                    }
+            for vp, p in vendorProduce]
+        if not produce:
+            return reply_missing(id=id)
+        return reply_success(produce)

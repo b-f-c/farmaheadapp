@@ -1,4 +1,4 @@
-import logging;
+import logging
 
 log = logging.getLogger(__name__)
 from .base import db, ma, BaseModel
@@ -6,20 +6,22 @@ from marshmallow import EXCLUDE
 
 """
 {
-    "item": "Asparagus"
+    "produce": "Asparagus"
+    "type": "Vegetable"
     "id": 1
 """
 
 
-class ItemModel(BaseModel):
-    __tablename__ = 'items'
+class ProduceModel(BaseModel):
+    __tablename__ = 'produce'
 
-    item = db.Column(db.String(), nullable=False, unique=True)
+    produceName = db.Column(db.String(), nullable=False, unique=True)
+    produceType = db.Column(db.String())
 
 
-class ItemSchema(ma.ModelSchema):
+class ProduceSchema(ma.ModelSchema):
     class Meta:
-        model = ItemModel
+        model = ProduceModel
         unknown = EXCLUDE
         strict = False
     # no further action is needed unless you want to override default behavior, which if

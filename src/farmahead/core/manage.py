@@ -11,7 +11,7 @@ from .commands import PytestCommand, CoverageCommand
 from farmahead.models import db, ma
 from farmahead.models import MarketModel, MarketSchema, MarketVendorModel, VendorModel
 
-from farmahead.mock import ItemMock, MarketMock, VendorMock, MarketVendorMock
+from farmahead.mock import ProduceMock, MarketMock, VendorMock, MarketVendorMock, VendorProduceMock
 
 
 TableCommand = Manager(usage='Handle creation & removal of tables within database')
@@ -40,14 +40,15 @@ MockCommand = Manager(usage="Attempt to insert mock data for models")
 
 @MockCommand.command
 def all():
-    item()
+    produce()
     market()
     vendor()
     marketVendor()
+    vendorProduce()
 
 @MockCommand.command
-def item():
-    ItemMock().mock_bulk()
+def produce():
+    ProduceMock().mock_bulk()
 
 @MockCommand.command
 def market():
@@ -60,6 +61,10 @@ def vendor():
 @MockCommand.command
 def marketVendor():
     MarketVendorMock().mock_bulk()
+
+@MockCommand.command
+def vendorProduce():
+    VendorProduceMock().mock_bulk()
 
 
 manager = Manager(create_app)
