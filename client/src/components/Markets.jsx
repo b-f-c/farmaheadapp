@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Page from './Page'
 import MarketCard from './MarketCard'
 
 import FlexBox from './custom/FlexBox'
@@ -7,7 +8,7 @@ import FlexBox from './custom/FlexBox'
 export default () => {
 
 	return (
-		<div style={{width: '100%', height: '100%', padding: '24px 24px 24px 24px'}}>
+		<Page>
 			<FlexBox direction='row' pad={{between: 'small'}}>
 				<FlexBox>
 					<MarketCard 
@@ -24,6 +25,6 @@ export default () => {
 					/>
 				</FlexBox>
 			</FlexBox>
-		</div>
+		</Page>
 	)
 }
