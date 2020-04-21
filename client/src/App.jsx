@@ -1,16 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-} from 'react-router-dom';
+} from 'react-router-dom'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import logo from './logo.svg';
-import Selection from './Components/Selection';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import LandingPage from './Components/LandingPage'
 
 function App() {
   return (
@@ -18,11 +17,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/">
-            <div style={{ position: 'absolute', zIndex: 2 }}>
-              <h1 style={{ textAlign: 'center' }}>Farm Ahead</h1>
-              <img src={logo} className="App-logo" alt="logo" />
-              <Selection />
-            </div>
+            <LandingPage />
             <div className="App-background" />
           </Route>
           <Route path="/foo">
@@ -34,7 +29,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
