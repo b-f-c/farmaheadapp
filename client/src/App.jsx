@@ -7,24 +7,30 @@ import {
   Link,
 } from 'react-router-dom'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import LandingPage from './Components/LandingPage'
+import {
+  Nav, Navbar, NavDropdown, Form, FormControl, Button,
+} from 'react-bootstrap';
+import logo from './logo.svg';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+import LandingPage from './components/LandingPage'
+
+import NavHeader from './components/NavHeader'
+
+import Markets from './components/Markets'
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/">
+          <Route path="/login">
             <LandingPage />
-            <div className="App-background" />
           </Route>
-          <Route path="/foo">
-            <div>foo</div>
-          </Route>
-          <Route path="/bar">
-            <div>bar</div>
+          <Route path="/markets">
+            <Markets />
           </Route>
         </Switch>
       </div>
