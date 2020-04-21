@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-} from 'react-router-dom';
+} from 'react-router-dom'
 
 import {
   Nav, Navbar, NavDropdown, Form, FormControl, Button,
@@ -15,6 +15,8 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+import LandingPage from './components/LandingPage'
+
 import NavHeader from './components/NavHeader'
 
 import Markets from './components/Markets'
@@ -23,12 +25,9 @@ function App() {
   return (
     <Router>
       <div className="App">
-				<div style={{width: '100%'}}>
-					<NavHeader />
-				</div>
         <Switch>
-          <Route path="/foo">
-            <div>foo</div>
+          <Route path="/login">
+            <LandingPage />
           </Route>
           <Route path="/markets">
             <Markets />
@@ -36,7 +35,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
