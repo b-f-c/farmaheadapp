@@ -40,8 +40,13 @@
   justify-content: center;
 }
 
+.App-login-container {
+  display: flex;
+  justify-content: center;
+}
+
 .App-link {
-  color: #61dafb;
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {
