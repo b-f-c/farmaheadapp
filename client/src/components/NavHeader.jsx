@@ -3,9 +3,11 @@ import styled from 'styled-components'
 
 import FlexBox from './custom/FlexBox'
 
+import { IoIosLeaf } from 'react-icons/io'
+
 const NavHeader = styled.div`
 	width: 100%;
-	height: 50px;
+	height: 62px;
 
 	display: flex;
 	justify-content: start;
@@ -19,7 +21,10 @@ export default () => {
 
 	return (
 		<NavHeader>
-			<FlexBox style={{fontSize: '1.5em', paddingLeft: '12px'}} ><b>FarmAhead</b></FlexBox>
+			<FlexBox justify='center' align='center' direction='row' style={{paddingLeft: '12px'}}>
+				<IoIosLeaf size={'1.2em'} color={'#27ae60'} />
+				<FlexBox style={{fontSize: '1.5em', paddingLeft: '4px'}} ><b>Farm</b>Ahead</FlexBox>
+			</FlexBox>
 		</NavHeader>
 	)
 }
