@@ -1,10 +1,13 @@
 import os
 import time
 import json
+import logging
 
 from farmahead.models import db, VendorModel
 from farmahead.resources import VendorResource
 from .base import BaseMock
+
+log = logging.getLogger(__name__)
 
 
 class VendorMock(BaseMock):
@@ -39,6 +42,7 @@ class VendorMock(BaseMock):
                     ]
                 )
             except Exception as e:
+                log.warning(str(e))
                 pass
         db.session.commit()
         print("Total time for " + str(data_size) +

@@ -25,6 +25,7 @@ class VendorModel(BaseModel):
     contactPhone = db.Column(db.String(), nullable=True)
 
     snapStatus = db.Column(db.Boolean(), nullable=False)
+    s3_url = db.Column(db.String(), nullable=True)
 
 
 class VendorSchema(ma.ModelSchema):
