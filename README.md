@@ -4,6 +4,9 @@
 Our homegrown app is a search engine and marketplace that connects shoppers to markets, vedors and farmers with the goal of keeping food local and healthy. We hope to provide an online marketplace for small farms and vendors who would rather focus on the soil than build an e-commerce site.
 
 ### Design
+#### Logo
+Logo painfully created by team member Brett Cropp in Inkscape, and would gladly accept applications for graphic desginers
+
 #### Data
 * Farmer's Markets pulled from [NY Data](https://data.ny.gov/Economic-Development/Farmers-Markets-in-New-York-State/qq4h-8p86)
 * Other data programatically generated in Jupyter and [Mockaroo](https://www.mockaroo.com)
