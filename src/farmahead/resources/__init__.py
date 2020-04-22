@@ -4,6 +4,7 @@ from .version import VersionResource
 from .market import MarketResource, MarketByZipResource, MarketByProduceResource
 from .produce import ProduceResource, ProduceByVendorResource
 from .vendor import VendorResource, VendorByProduceResource, VendorByProduceListResource
+from .user import UserResource
 
 api.add_resource(IndexResource,     '/')
 """ 
@@ -13,6 +14,7 @@ api.add_resource(VersionResource,   '/version')
 api.add_resource(MarketResource,    '/market')
 api.add_resource(ProduceResource, '/produce')
 api.add_resource(VendorResource, '/vendor')
+api.add_resource(UserResource, '/user')
 """ 
     Endpoints with joins
 """
