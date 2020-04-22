@@ -1,0 +1,43 @@
+[{
+  "id": 1,
+  "firstName": "Jane",
+  "lastName": "Shopaholic",
+  "userName": "janeshops",
+  "role": "shopper",
+  "email": "iloveveggies0@booking.com",
+  "gender": "Female",
+  "s3_url": "https://robohash.org/pariaturutsunt.bmp?size=50x50&set=set1",
+  "password": "janeshops",
+  "latitude": 43.100429999999996,
+  "longitude": -75.22483000000001,
+  "zip": "95579",
+  "snapEligibility": false
+}, {
+  "id": 2,
+  "firstName": "Joe",
+  "lastName": "Farmer",
+  "userName": "joefarms",
+  "role": "vendor",
+  "email": "jfarmer@feedburner.com",
+  "gender": "Male",
+  "s3_url": "https://robohash.org/delectusnihilvel.jpg?size=50x50&set=set1",
+  "password": "joefarms",
+  "latitude": 42.8336454478,
+  "longitude": -78.7569821908,
+  "zip": "15695",
+  "snapEligibility": false
+}, {
+  "id": 3,
+  "firstName": "Ian",
+  "lastName": "Dewberry",
+  "role": "marketAdmin",
+  "userName": "iandews",
+  "email": "idewberry2@deviantart.com",
+  "gender": "Male",
+  "s3_url": "https://robohash.org/oditnemovel.png?size=50x50&set=set1",
+  "password": "dewdews",
+  "latitude": 40.82172,
+  "longitude": -73.92524,
+  "zip": "68290",
+  "snapEligibility": false
+}]
