@@ -13,7 +13,7 @@
     init
   ignore_errors: no
   args:
-    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}
+    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}/server
     creates: migrations/
 
 - name: Manager Database migration
@@ -23,7 +23,7 @@
     migrate
   ignore_errors: yes
   args:
-    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}
+    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}/server
 
 - name: Manager Database upgrade
   command: >
@@ -32,4 +32,4 @@
     upgrade
   ignore_errors: no
   args:
-    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}
+    chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}/server

@@ -1,9 +1,26 @@
 # Custom list
-# resetdatabase.sh
-examples/
-bin/
-include/
-migrations/versions
+
+# Javascript
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -94,6 +111,9 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+bin/
+include/
+
 .vscode
 # Spyder project settings
 .spyderproject
@@ -118,3 +138,4 @@ media/
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+migrations/versions
