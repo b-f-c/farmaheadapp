@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { v4 } from 'uuid';
 
 const MARGIN_VALUES = {
   small: '12px',
@@ -12,7 +13,7 @@ const _mapMarginToValue = (margin) => MARGIN_VALUES[margin]
 const _performPad = (pad, children) => children.map((child, i) => {
   if (i < (children.length - 1)) {
     return React.cloneElement(child, {
-      key: i,
+      key: v4(),
       style: { marginRight: _mapMarginToValue(pad.between) },
     })
   }
