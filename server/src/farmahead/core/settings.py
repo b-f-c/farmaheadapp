@@ -12,7 +12,7 @@ class Settings:
         self.SQLALCHEMY_TRACK_MODIFICATIONS = False
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
         self.LOG_FILE = os.getenv('LOG_FILE', 'flask.log')
-        self.DB_USERNAME = os.getenv('RDS_USERNAME', 'ubuntu')
+        self.DB_USERNAME = os.getenv('RDS_USERNAME', 'postgres')
         self.DB_PASSWORD = os.getenv('RDS_PASSWORD', 'password')
         self.DB_HOST = os.getenv('RDS_HOST', 'localhost')
         self.DB_NAME = os.getenv('RDS_NAME', 'farmahead')
@@ -25,7 +25,7 @@ class Development(Settings):
         self.ENV = 'Development'
         self.DEBUG = True
         self.TESTING = False
-        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_USERNAME}@localhost/${self.DB_NAME}_dev'
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_PASSWORD}@localhost/${self.DB_NAME}'
 
 
 class Testing(Settings):
@@ -35,7 +35,7 @@ class Testing(Settings):
         self.ENV = 'Testing'
         self.DEBUG = True
         self.TESTING = True
-        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_USERNAME}@localhost/${self.DB_NAME}_test'
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_PASSWORD}@localhost/${self.DB_NAME}'
 
 
 class Production(Settings):
