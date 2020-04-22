@@ -28,6 +28,12 @@ postgres_core:
   - postgresql-client-common
   - python3-psycopg2
 
+nodejs_core:
+  - nodejs
+  - make
+  - gcc
+  - g++
+
 # application
 wsgi_path: "{{ entry_point }}.core.wsgi"
 nginx_build_path: /var/www/html/build

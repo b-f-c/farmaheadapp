@@ -29,9 +29,16 @@
 # See: https://github.com/npm/cli/issues/681
 - name: Install NPM manually since default installation is outdated
   become: yes
-  command: >
-    npm --version && \
-      curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-      apt -y install nodejs make gcc g++ \
-    || echo "NPM Already Installed"
+  shell: >
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash
   ignore_errors: no
+  args:
+    warn: false
+
+- name: Install NodeJS system dependencies
+  become: true
+  apt:
+    name: "{{ nodejs_core }}"
+    state: latest
+    update_cache: yes
+    force_apt_get: true
