@@ -1,4 +1,5 @@
 # Farm Ahead
+![](client/public/farmaheadlogo_medium.png)
 #### Introducing Farm Ahead, an app to bridge the gap between the farm and you.
 Our homegrown app is a search engine and marketplace that connects shoppers to markets, vedors and farmers with the goal of keeping food local and healthy. We hope to provide an online marketplace for small farms and vendors who would rather focus on the soil than build an e-commerce site.
 
