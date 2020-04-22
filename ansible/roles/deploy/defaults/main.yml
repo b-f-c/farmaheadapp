@@ -30,6 +30,7 @@ postgres_core:
 
 # application
 wsgi_path: "{{ entry_point }}.core.wsgi"
+nginx_build_path: /var/www/html/build
 
 log_file_directory: "/home/{{ ansible_ssh_user }}/log"
 flask_log_path: "{{ log_file_directory }}/flask/flask.log"

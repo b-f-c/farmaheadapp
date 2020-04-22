@@ -24,12 +24,7 @@
   include: 04_database.yml
   tags: ['database']
 
-- name: Install frontend
-  become: no
-  include: 05_api.yml
-  tags: ['api']
-
-- name: Install application
+- name: Install application (client & server)
   become: no
   include: 05_app.yml
   tags: ['app']
