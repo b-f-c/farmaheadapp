@@ -3,37 +3,46 @@ import os
 
 
 class Settings:
-    APP_VERSION = __version__
-    APPLICATION_ROOT = '/api'
-    HOST = 'localhost'
-    PORT = 8000
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    LOG_LEVEL = 'INFO'
-    LOG_FILE = 'flask.log'
+
+    def __init__(self):
+        self.APP_VERSION = __version__
+        self.APPLICATION_ROOT = '/api'
+        self.HOST = 'localhost'
+        self.PORT = 8000
+        self.SQLALCHEMY_TRACK_MODIFICATIONS = False
+        self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+        self.LOG_FILE = os.getenv('LOG_FILE', 'flask.log')
+        self.DB_USERNAME = os.getenv('RDS_USERNAME', 'ubuntu')
+        self.DB_PASSWORD = os.getenv('RDS_PASSWORD', 'password')
+        self.DB_HOST = os.getenv('RDS_HOST', 'localhost')
+        self.DB_NAME = os.getenv('RDS_NAME', 'farmahead')
 
 
 class Development(Settings):
-    ENV = 'Development'
-    DEBUG = True
-    TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/farmahead_dev'
+
+    def __init__(self):
+        Settings.__init__(self)
+        self.ENV = 'Development'
+        self.DEBUG = True
+        self.TESTING = False
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_USERNAME}@localhost/${self.DB_NAME}_dev'
 
 
 class Testing(Settings):
-    ENV = 'Testing'
-    DEBUG = True
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/farmahead_test'
+
+    def __init__(self):
+        Settings.__init__(self)
+        self.ENV = 'Testing'
+        self.DEBUG = True
+        self.TESTING = True
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:${self.DB_USERNAME}@localhost/${self.DB_NAME}_test'
 
 
 class Production(Settings):
-    ENV = 'Production'
-    DEBUG = False
-    TESTING = False
-    LOG_LEVEL = os.getenv('LOG_LEVEL')
-    LOG_FILE = os.getenv('LOG_FILE')
-    DB_USERNAME = os.getenv('RDS_USERNAME')
-    DB_PASSWORD = os.getenv('RDS_PASSWORD')
-    DB_HOST = os.getenv('RDS_HOST')
-    DB_NAME = os.getenv('RDS_NAME', 'farmahead')
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+
+    def __init__(self):
+        Settings.__init__(self)
+        self.ENV = 'Production'
+        self.DEBUG = False
+        self.TESTING = False
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:{self.DB_PASSWORD}@{self.DB_HOST}/{self.DB_NAME}'

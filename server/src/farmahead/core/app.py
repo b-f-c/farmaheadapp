@@ -1,11 +1,11 @@
 import logging;
 
 log = logging.getLogger(__name__)
-import os
+
 from flask import Flask
 
 from farmahead.models import migrate, db
-
+from .settings import *
 
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
@@ -14,9 +14,14 @@ def create_app(config_cls=None, settings_override=None):
     else:
         loc = 'ENV'
         config_cls = os.environ['FLASK_CONFIG_CLASS']
-    src = f'farmahead.core.settings.{config_cls.title()}'
-    print(f'{loc}: {src}')
-    app.config.from_object(src)
+    mode = config_cls.title()
+    configs = {
+        "Production": Production(),
+        "Development": Development(),
+        "Testing": Testing()
+    }
+    print(f'{loc}: {configs.get(mode)}')
+    app.config.from_object(configs.get(mode))
     app.url_map.strict_slashes = False  # dont require trailing slashes
 
     if settings_override:
