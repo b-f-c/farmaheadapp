@@ -5,7 +5,7 @@ server {
     
     ## React
     location / {
-        root /usr/share/nginx/html; #(path to JS build)
+        root {{ nginx_build_path }}; #(path to JS build)
     }
 
     ## Flask

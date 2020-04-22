@@ -24,17 +24,19 @@
     dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
 
-# - name: Remove existing nginx site config
-#   file:
-#     path: /etc/nginx/sites-enabled/default
-#     state: absent
+- name: Add robots.txt for SEO & Indexing
+  become: true
+  copy:
+    src: files/robots.txt
+    dest: "{{ nginx_build_path }}/robots.txt"
+    force: yes
 
-# - name: Enable nginx site
-#   file:
-#     src: /etc/nginx/sites-available/{{ app_name }}.conf
-#     dest: /etc/nginx/sites-enabled/default
-#     state: link
-#     force: yes
+- name: Add robocop.txt for Shits & Giggles
+  become: true
+  copy:
+    src: files/robocop.txt
+    dest: "{{ nginx_build_path }}/robocop.txt"
+    force: yes
 
 - name: Restart nginx
   systemd:
