@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Navbar, Form, FormControl, Button,
+  Form,
 } from 'react-bootstrap'
 
 const Selection = () => {
