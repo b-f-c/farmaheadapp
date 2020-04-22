@@ -25,7 +25,7 @@ class Development(Settings):
         self.ENV = 'Development'
         self.DEBUG = True
         self.TESTING = False
-        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:{self.DB_PASSWORD}@localhost/${self.DB_NAME}'
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:{self.DB_PASSWORD}@localhost/{self.DB_NAME}'
 
 
 class Testing(Settings):
@@ -35,7 +35,7 @@ class Testing(Settings):
         self.ENV = 'Testing'
         self.DEBUG = True
         self.TESTING = True
-        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:{self.DB_PASSWORD}@localhost/${self.DB_NAME}'
+        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USERNAME}:{self.DB_PASSWORD}@localhost/{self.DB_NAME}'
 
 
 class Production(Settings):
