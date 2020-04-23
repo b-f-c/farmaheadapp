@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { v4 } from 'uuid'
 import { Col, Row } from 'react-bootstrap'
-import * as marketsActions from '../../redux/actions/markets/marketsActions'
 import MarketCard from '../MarketCard'
-import Page from '../Page'
 
 const mapStateToProps = (state) => ({
   ...state.markets,
@@ -14,11 +12,6 @@ const ROW_SIZE = 6
 
 const Markets = () => {
   const { markets } = useSelector(mapStateToProps)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(marketsActions.fetchMarkets())
-  }, [])
 
   const marketCards = []
   markets.forEach((market, idx) => {
@@ -40,9 +33,7 @@ const Markets = () => {
   })
 
   return (
-    <Page>
       <Row>{marketCards}</Row>
-    </Page>
   )
 }
 

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import MarketsReducer from './markets/marketsReducer';
+import { MarketsReducer, VendorsReducer, ProduceReducer } from './page/pageReducer';
 
 export default combineReducers({
   markets: MarketsReducer,
+  vendors: VendorsReducer,
+  produce: ProduceReducer
 });

@@ -1,4 +1,5 @@
 import logging;
+from flask_cors import CORS
 
 log = logging.getLogger(__name__)
 import os
@@ -9,6 +10,7 @@ from farmahead.models import migrate, db
 
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
+    CORS(app)
     if config_cls:
         loc = 'ARG'
     else:

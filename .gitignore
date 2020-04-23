@@ -1,7 +1,7 @@
 # Custom list
 
 # Javascript
-/node_modules
+client/node_modules
 /.pnp
 .pnp.js
 
