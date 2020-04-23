@@ -11,6 +11,7 @@
     name: gunicorn.service
     state: restarted
     enabled: yes
+    daemon_reload: yes
 
 - name: Template nginx global config
   template:
@@ -20,12 +21,9 @@
 
 - name: Template nginx site config
   template:
-    src: templates/https.conf.j2
+    src: "{{ nginx_conf }}"
     dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
-
-- name: reload nginx
-  service: name=nginx state=reloaded
 
 - name: Add robots.txt for SEO & Indexing
   become: true
@@ -46,6 +44,7 @@
     name: nginx
     state: restarted
     enabled: yes
+    daemon_reload: yes
 
 - name: Open firewall
   ufw:
