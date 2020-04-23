@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Page from './Page'
+import Page from './page/Page'
 import MarketCard from './MarketCard'
 
 import FlexBox from './custom/FlexBox'

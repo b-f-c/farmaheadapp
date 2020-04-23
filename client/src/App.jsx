@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import LandingPage from './components/LandingPage'
 import Markets from './components/Markets'
+import Page from './components/page/Page'
+
+// l o l
+import * as constants from './constants/constants'
 
 function App() {
   return (
@@ -17,8 +21,14 @@ function App() {
           <Route path="/login">
             <LandingPage />
           </Route>
-          <Route path="/markets">
-            <Markets />
+          <Route path={`/${constants.MARKET}`}>
+            <Page page={constants.MARKET} />
+          </Route>
+          <Route path={`/${constants.VENDOR}`}>
+            <Page page={constants.VENDOR} />
+          </Route>
+          <Route path={`/${constants.PRODUCE}`}>
+            <Page page={constants.PRODUCE} />
           </Route>
         </Switch>
       </div>
