@@ -20,9 +20,12 @@
 
 - name: Template nginx site config
   template:
-    src: templates/site.j2
+    src: templates/https.conf.j2
     dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
+
+- name: reload nginx
+  service: name=nginx state=reloaded
 
 - name: Add robots.txt for SEO & Indexing
   become: true
