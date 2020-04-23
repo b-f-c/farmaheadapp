@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import { IoIosLeaf } from 'react-icons/io'
+import { MARKET, VENDOR, PRODUCE } from '../../constants/globalConstants'
 
 const NavHeader = styled.div`
   width: 100%;
@@ -41,13 +42,13 @@ export default () => {
         direction="row"
         style={{ paddingLeft: '12px', height: '95%' }}
       >
-        <LinkContainer to="market">
+        <LinkContainer to={MARKET}>
           <Button className='Nav-buttons' variant='outline-success'>Markets</Button>
         </LinkContainer>
-        <LinkContainer to="vendor">
+        <LinkContainer to={VENDOR}>
           <Button className='Nav-buttons' variant='outline-success'>Vendors</Button>
         </LinkContainer>
-        <LinkContainer to="produce">
+        <LinkContainer to={PRODUCE}>
           <Button className='Nav-buttons' variant='outline-success'>Produce</Button>
         </LinkContainer>
       </FlexBox>
