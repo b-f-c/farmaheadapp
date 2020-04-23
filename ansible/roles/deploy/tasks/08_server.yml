@@ -21,7 +21,7 @@
 
 - name: Template nginx site config
   template:
-    src: "{{ nginx_conf }}"
+    src: templates/{{ site_conf_template }}
     dest: /etc/nginx/conf.d/{{ app_name }}.conf
     force: yes
 
