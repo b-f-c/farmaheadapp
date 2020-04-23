@@ -10,7 +10,6 @@ from farmahead.models import migrate, db
 
 def create_app(config_cls=None, settings_override=None):
     app = Flask(__name__)
-    CORS(app)
     if config_cls:
         loc = 'ARG'
     else:
@@ -34,6 +33,7 @@ def create_app(config_cls=None, settings_override=None):
 def init_app(app):
     db.init_app(app)
     migrate.init_app(app, db)
+    CORS(app)
     # api.init_app(app) # dont think we need this but afraid to delete :(
     from farmahead.resources import bp
     app.register_blueprint(bp, url_prefix=app.config['APPLICATION_ROOT'])
