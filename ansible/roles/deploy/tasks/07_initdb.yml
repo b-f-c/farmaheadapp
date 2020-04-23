@@ -5,12 +5,14 @@
   args:
     executable: /bin/bash
     chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}/server/
+
 - name: Create Tables
   shell: source env/bin/activate && farmahead table createall
   ignore_errors: false
   args:
     executable: /bin/bash
     chdir: /home/{{ ansible_ssh_user }}/{{ app_name }}/server/
+
 - name: Mock data
   shell: source env/bin/activate && farmahead mock all
   ignore_errors: false
