@@ -31,15 +31,20 @@
 
 - name: Migrate database
   become: no
-  include: 06_migration.yml
+  include: 06_migrate.yml
   tags: ['migrate']
+
+- name: InitDB
+  become: no
+  include: 07_initdb.yml
+  tags: ['initdb']
 
 - name: Configure Nginx server
   become: yes
-  include: 07_server.yml
+  include: 08_server.yml
   tags: ['server']
 
 - name: Test if site is accessable
   become: no
-  include: 08_test.yml
+  include: 09_test.yml
   tags: ['test']
