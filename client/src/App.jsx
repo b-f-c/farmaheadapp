@@ -4,14 +4,14 @@ import {
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import LandingPage from './components/LandingPage'
-import Market from './components/markets/'
-import Page from './components/page/Page'
+} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import LandingPage from './components/landing-page'
+import Market from './components/market'
+import Page from './components/page'
 
-import {MARKET, VENDOR, PRODUCE} from './constants/globalConstants'
+import { MARKET, VENDOR, PRODUCE } from './constants/globalConstants'
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           </Route>
           <Route path={`/${MARKET}`}>
             <Page page={MARKET}>
-              <Market/>
+              <Market />
             </Page>
           </Route>
           <Route path={`/${VENDOR}`}>

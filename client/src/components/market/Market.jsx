@@ -1,8 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+
 import { v4 } from 'uuid'
 import { Col, Row } from 'react-bootstrap'
-import MarketCard from '../MarketCard'
+
+import MarketCard from '../market-card'
 
 const mapStateToProps = (state) => ({
   ...state.markets,
@@ -10,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 const ROW_SIZE = 6
 
-const Markets = () => {
+const Market = () => {
   const { markets } = useSelector(mapStateToProps)
 
   const marketCards = []
@@ -32,9 +34,7 @@ const Markets = () => {
     }
   })
 
-  return (
-      <Row>{marketCards}</Row>
-  )
+  return <Row>{marketCards}</Row>
 }
 
-export default Markets
+export default Market

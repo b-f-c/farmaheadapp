@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { IoIosLeaf } from 'react-icons/io'
-import FlexBox from './custom/FlexBox'
+import FlexBox from '../custom/FlexBox'
 
-import LoginRegister from './LoginRegister'
+import LoginRegister from '../login-register'
 
 const LandingPage = () => (
   <FlexBox
