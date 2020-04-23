@@ -1,5 +1,6 @@
 # core deps
 flask
+flask-cors
 flask-script
 flask-restful
 flask-migrate
