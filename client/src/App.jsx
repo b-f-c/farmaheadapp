@@ -3,32 +3,37 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import LandingPage from './components/LandingPage'
-import Markets from './components/Markets'
+import Market from './components/markets/'
 import Page from './components/page/Page'
 
-// l o l
-import * as constants from './constants/constants'
+import {MARKET, VENDOR, PRODUCE} from './constants/globalConstants'
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route exact path="/">
+            <Redirect to={`/${MARKET}`} />
+          </Route>
           <Route path="/login">
             <LandingPage />
           </Route>
-          <Route path={`/${constants.MARKET}`}>
-            <Page page={constants.MARKET} />
+          <Route path={`/${MARKET}`}>
+            <Page page={MARKET}>
+              <Market/>
+            </Page>
           </Route>
-          <Route path={`/${constants.VENDOR}`}>
-            <Page page={constants.VENDOR} />
+          <Route path={`/${VENDOR}`}>
+            <Page page={VENDOR} />
           </Route>
-          <Route path={`/${constants.PRODUCE}`}>
-            <Page page={constants.PRODUCE} />
+          <Route path={`/${PRODUCE}`}>
+            <Page page={PRODUCE} />
           </Route>
         </Switch>
       </div>

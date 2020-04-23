@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  Navbar, Form, FormControl, Button,
-} from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 
 const Selection = () => {
   const SHOPPER = 'I am a shopper'

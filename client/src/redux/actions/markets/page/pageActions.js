@@ -1,8 +1,7 @@
 import Axios from 'axios';
 import { MARKETS_RECEIVED, VENDORS_RECEIVED, PRODUCE_RECEIVED, PAGE_REQUESTED } from './pageActionTypes'
 
-// l o l
-import * as constants from '../../../../constants/constants'
+import { MARKET, VENDOR, PRODUCE } from '../../../../constants/globalConstants'
 
 export function pageRequested() {
   return { type: PAGE_REQUESTED };
@@ -10,11 +9,11 @@ export function pageRequested() {
 
 export function pageReceived(page, pageData) {
 	switch(page) {
-		case constants.MARKET:
+		case MARKET:
 			return { type: MARKETS_RECEIVED, payload: pageData };
-		case constants.VENDOR:
+		case VENDOR:
 			return { type: VENDORS_RECEIVED, payload: pageData };
-		case constants.PRODUCE:
+		case PRODUCE:
 			return { type: PRODUCE_RECEIVED, payload: pageData };
 	}
 }
