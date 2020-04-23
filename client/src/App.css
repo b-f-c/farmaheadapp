@@ -44,6 +44,11 @@
   color: #ffffff;
 }
 
+.Nav-buttons {
+  height: 95%;
+  margin-right: 2px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
