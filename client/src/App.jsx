@@ -24,6 +24,9 @@ function App() {
           <Route exact path="/">
             <Redirect to={`/${MARKET}`} />
           </Route>
+          <Route path={`/${VENDOR}/${ADMIN}`}>
+            <VendorAdmin />
+          </Route>
           <Route path="/login">
             <LandingPage />
           </Route>
@@ -41,9 +44,6 @@ function App() {
             <Page page={PRODUCE}>
               <Produce />
             </Page>
-          </Route>
-          <Route path={`/${VENDOR}/${ADMIN}`}>
-            <VendorAdmin />
           </Route>
           <Route>
             <div style={{ color: '#ffffff' }}>404</div>

@@ -20,13 +20,13 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
 
   width: 300px;
-	height: 350px;
-	
-	transition: padding-bottom 0.2s;
+  height: 350px;
 
-	&:hover {
-		padding-bottom: 15px;
-	}
+  transition: padding-bottom 0.2s;
+
+  &:hover {
+    padding-bottom: 15px;
+  }
 `
 
 const Stars = ({ quantity }) => {
@@ -50,7 +50,7 @@ const Stars = ({ quantity }) => {
 }
 
 export default (props) => {
-  const { title, address, stars } = props
+  const { title, address, stars, imgSrc } = props
 
   return (
     <Card>
@@ -59,15 +59,23 @@ export default (props) => {
         align="center"
         style={{
           borderBottom: '1px solid #d9d9d9',
-          height: '70%',
+          height: '60%',
           backgroundColor: '#e6e6e6',
         }}
       >
-        <IoMdCamera color="#939393" size="2.5em" />
+        <div>
+          <img
+            className="rounded img-fluid overflow-hidden"
+            src={imgSrc}
+            alt={title}
+          />
+        </div>
       </FlexBox>
-      <FlexBox margin="small">
-        <FlexBox direction="column" style={{padding: '12px'}}>
-          <FlexBox><b>{title}</b></FlexBox>
+      <FlexBox style={{ height: '40%' }} align="flex-end" margin="small">
+        <FlexBox direction="column" style={{ padding: '12px' }}>
+          <FlexBox>
+            <b>{title}</b>
+          </FlexBox>
           <Stars quantity={stars} />
           <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
         </FlexBox>

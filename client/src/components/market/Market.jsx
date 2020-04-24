@@ -10,25 +10,24 @@ const mapStateToProps = (state) => ({
 })
 
 const renderMarketCard = (market) => {
-	const { marketName, locationAddress } = market
+  const { marketName, locationAddress, s3_url } = market
 
-	return (
-		<FlexBox shrink>
-			<PageCard
-				title={marketName}
-				stars={Math.random() * 6}
-				address={locationAddress}
-			/>
-		</FlexBox>
-	)
+  return (
+    <FlexBox shrink>
+      <PageCard
+        title={marketName}
+        stars={Math.random() * 5}
+        address={locationAddress}
+        imgSrc={s3_url}
+      />
+    </FlexBox>
+  )
 }
 
 const Market = () => {
-	const { markets = [] } = useSelector(mapStateToProps)
+  const { markets = [] } = useSelector(mapStateToProps)
 
-	return (
-		<Paginate objects={markets} renderCard={renderMarketCard} />
-	)
+  return <Paginate objects={markets} renderCard={renderMarketCard} />
 }
 
 export default Market
