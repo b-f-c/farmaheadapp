@@ -17,6 +17,7 @@ class ProduceModel(BaseModel):
 
     produceName = db.Column(db.String(), nullable=False, unique=True)
     produceType = db.Column(db.String())
+    s3_url = db.Column(db.String(), nullable=True)
 
 
 class ProduceSchema(ma.ModelSchema):
