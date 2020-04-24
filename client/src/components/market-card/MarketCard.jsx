@@ -20,7 +20,13 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
 
   width: 300px;
-  height: 350px;
+	height: 350px;
+	
+	transition: padding-bottom 0.2s;
+
+	&:hover {
+		padding-bottom: 15px;
+	}
 `
 
 const Stars = ({ quantity }) => {
@@ -60,10 +66,8 @@ export default (props) => {
         <IoMdCamera color="#939393" size="2.5em" />
       </FlexBox>
       <FlexBox margin="small">
-        <FlexBox direction="column">
-          <FlexBox>
-            <b>{title}</b>
-          </FlexBox>
+        <FlexBox direction="column" style={{padding: '12px'}}>
+          <FlexBox><b>{title}</b></FlexBox>
           <Stars quantity={stars} />
           <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
         </FlexBox>
