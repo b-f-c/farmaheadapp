@@ -12,8 +12,9 @@ import Market from './components/market'
 import Vendor from './components/vendor'
 import Page from './components/page'
 
-import { MARKET, VENDOR, PRODUCE } from './constants/globalConstants'
+import { MARKET, VENDOR, PRODUCE, ADMIN } from './constants/globalConstants'
 import Produce from './components/produce/Produce'
+import VendorAdmin from './components/vendor-admin'
 
 function App() {
   return (
@@ -41,11 +42,12 @@ function App() {
               <Produce />
             </Page>
           </Route>
-					<Route>
-						<div style={{color: '#ffffff'}}>
-							404
-						</div>
-					</Route>
+          <Route path={`/${VENDOR}/${ADMIN}`}>
+            <VendorAdmin />
+          </Route>
+          <Route>
+            <div style={{ color: '#ffffff' }}>404</div>
+          </Route>
         </Switch>
       </div>
     </Router>
