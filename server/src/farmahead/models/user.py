@@ -1,5 +1,5 @@
 import logging; log=logging.getLogger(__name__)
-from .base import db, ma, BaseModel
+from .base import db, BaseModel, BaseSchema
 from marshmallow import EXCLUDE
 
 """
@@ -39,7 +39,7 @@ class UserModel(BaseModel):
     zip =           db.Column(db.Integer(), nullable=True)
 
 
-class UserSchema(ma.ModelSchema):
+class UserSchema(BaseSchema):
     class Meta:
         model = UserModel
         strict = False
