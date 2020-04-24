@@ -1,26 +1,42 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { v4 } from 'uuid'
 
 const MARGIN_VALUES = {
   small: '12px',
   medium: '24px',
 }
 
-// TODO: ability to pass in an object
-const _mapMarginToValue = (margin) => MARGIN_VALUES[margin]
+const _mapMarginToValue = (margin) => {
+	return MARGIN_VALUES[margin]
+}
 
-const _performPad = (pad, children) =>
-  children.map((child, i) => {
-    if (i < children.length - 1) {
-      return React.cloneElement(child, {
-        key: v4(),
-        style: { marginRight: _mapMarginToValue(pad.between) },
-      })
-    }
+const _performPad = (pad, direction, children) => {
 
-    return child
-  })
+	if (pad.between) {
+		return children.map((child, i) => {
+			if (i < children.length - 1) {
+	
+				let style 
+				if (direction == 'row') {
+					style = { marginRight: _mapMarginToValue(pad.between) }
+				} else {
+					style = { marginBottom: _mapMarginToValue(pad.between) }
+				}
+	
+				return React.cloneElement(child, {
+					key: i,
+					style
+				})
+			}
+	
+			return child
+		})
+	}
+
+	return children
+}
+
+  
 
 const FlexBox = styled.div`
   display: flex;
@@ -33,7 +49,8 @@ const FlexBox = styled.div`
   justify-content: ${(props) => props.theme.justify};
   align-items: ${(props) => props.theme.align};
 
-  margin: ${_mapMarginToValue((props) => props.theme.margin)};
+	margin: ${_mapMarginToValue((props) => props.theme.margin)};
+	padding: ${_mapMarginToValue((props) => props.theme.pad)};
 `
 
 export default (props) => {
@@ -58,10 +75,9 @@ export default (props) => {
     margin,
   }
 
-  let newChildren =
-    children instanceof Array && !!children ? children : [children]
+  let newChildren = children instanceof Array && !!children ? children : [children]
 
-  if (newChildren) newChildren = _performPad(pad, newChildren)
+  if (newChildren) newChildren = _performPad(pad, direction, newChildren)
 
   return (
     <ThemeProvider theme={theme}>
