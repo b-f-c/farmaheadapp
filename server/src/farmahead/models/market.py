@@ -44,6 +44,7 @@ class MarketModel(BaseModel):
     operationSeason =       db.Column(db.String(), nullable=True)
     
     snapStatus =            db.Column(db.Boolean(), nullable=False)
+    s3_url =                db.Column(db.String(), nullable=True)
 
 
 class MarketSchema(ma.ModelSchema):
