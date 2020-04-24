@@ -19,13 +19,6 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    ## Reduce log clutter
-    location = /favicon.ico {
-        return 204;  #(no content)
-        access_log     off;
-        log_not_found  off;
-    }
-    
     add_header Access-Control-Allow-Origin *;
     add_header Cache-Control no-cache; #(no cache for testing reasons, disable for final build)
 
