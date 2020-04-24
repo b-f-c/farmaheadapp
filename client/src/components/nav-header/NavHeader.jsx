@@ -1,16 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import FlexBox from '../custom/FlexBox'
+import LoginRegister from '../login-register'
 
 import NavButton from './NavButton'
-
 import { IoIosLeaf } from 'react-icons/io'
 import { MARKET, VENDOR, PRODUCE } from '../../constants/globalConstants'
 
 const NavHeader = styled.div`
-	width: 100%;
-	height: 62px;
+  width: 100%;
+  height: 62px;
   max-height: 62px;
 
   display: flex;
@@ -23,7 +24,11 @@ const NavHeader = styled.div`
   background-color: #ffffff;
 `
 
+const mapStateToProps = (state) => ({ ...state.user })
+
 export default () => {
+  const { user } = useSelector(mapStateToProps)
+
   return (
     <NavHeader>
       <FlexBox
@@ -40,14 +45,17 @@ export default () => {
       <FlexBox
         justify="center"
         align="center"
-				direction="row"
-				pad={{between: 'small'}}
+        direction="row"
+        pad={{ between: 'small' }}
         style={{ paddingLeft: '20px', height: '100%' }}
       >
-        <NavButton destination={MARKET} title={'Markets'}/>
-				<NavButton destination={VENDOR} title={'Vendors'}/>
-				<NavButton destination={PRODUCE} title={'Produce'}/>
+        <NavButton destination={MARKET} title={'Markets'} />
+        <NavButton destination={VENDOR} title={'Vendors'} />
+        <NavButton destination={PRODUCE} title={'Produce'} />
       </FlexBox>
+      {user && Object.keys(user).length ? null : (
+        <LoginRegister style={{ marginLeft: 'auto' }} />
+      )}
     </NavHeader>
   )
 }
