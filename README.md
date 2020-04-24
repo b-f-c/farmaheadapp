@@ -5,7 +5,7 @@ Our homegrown app is a search engine and marketplace that connects shoppers to m
 
 ### Design
 #### Logo
-Logo painfully created by team member Brett Cropp in Inkscape, and would gladly accept applications for graphic desginers
+Logo painfully created by team member Brett Cropp in Inkscape, and would gladly accept applications for graphic designers
 
 #### Data
 * Farmer's Markets pulled from [NY Data](https://data.ny.gov/Economic-Development/Farmers-Markets-in-New-York-State/qq4h-8p86)
