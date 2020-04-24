@@ -12,7 +12,7 @@ export const fetchUserData = (userInfo) => {
   const { username } = userInfo
   return (dispatch) => {
     dispatch(userRequested())
-    Axios.get(`${process.env.REACT_APP_REST_URL}/user?username=${username}`)
+    Axios.get(`${process.env.REACT_APP_REST_URL}/user?userName=${username}`)
       .then((response) => {
         dispatch(userReceived(response.data))
       })

@@ -17,7 +17,7 @@ export default (props) => {
   const [showRegisterModal, toggleRegisterModal] = useState(false)
 
   const dispatch = useDispatch()
-  const { user = {} } = useSelector(mapStateToProps)
+  const { user } = useSelector(mapStateToProps)
 
   const submitLogin = (e) => {
     e.preventDefault()

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import FlexBox from '../custom/FlexBox'
 import NavHeader from '../nav-header'
 
-import { fetchPageInfo } from '../../redux/actions/markets/page/pageActions'
+import { fetchPageInfo } from '../../redux/actions/page/pageActions'
 
 export default (props) => {
   const { children, page } = props
@@ -20,8 +20,8 @@ export default (props) => {
     <FlexBox direction="column" style={{ width: '100%', height: '100%' }}>
       <NavHeader />
       <FlexBox grow style={{ padding: '24px', width: '100%' }}>
-				{children}
-			</FlexBox>
+        {children}
+      </FlexBox>
     </FlexBox>
   )
 }
