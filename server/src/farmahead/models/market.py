@@ -45,6 +45,7 @@ class MarketModel(BaseModel):
     
     snapStatus =            db.Column(db.Boolean(), nullable=False)
     s3_url =                db.Column(db.String(), nullable=True)
+    rating = db.Column(db.Float(), nullable=True)
 
 
 class MarketSchema(ma.ModelSchema):

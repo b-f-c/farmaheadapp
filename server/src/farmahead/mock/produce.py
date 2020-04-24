@@ -11,7 +11,7 @@ class ProduceMock(BaseMock):
 
     def __init__(self):
         BaseMock.__init__(self)
-        self.data_path = os.path.join(self.data_folder, 'produce.json')
+        self.data_path = os.path.join(self.data_folder, 'produceWithImages.json')
         self.data = self.load_data()
 
     def load_data(self):
