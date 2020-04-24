@@ -44,12 +44,12 @@ class MarketModel(BaseModel):
     operationSeason =       db.Column(db.String(), nullable=True)
     
     snapStatus =            db.Column(db.Boolean(), nullable=False)
+    s3_url =                db.Column(db.String(), nullable=True)
 
 
 class MarketSchema(ma.ModelSchema):
     class Meta:
         model = MarketModel
-        unknown = EXCLUDE
         strict = False
     # no further action is needed unless you want to override default behavior, which if
     # fine 99% of the time unless you need to implement adhoc validation, etc.
