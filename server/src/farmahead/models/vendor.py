@@ -1,7 +1,7 @@
 import logging;
 
 log = logging.getLogger(__name__)
-from .base import db, ma, BaseModel
+from .base import db, BaseModel, BaseSchema
 from marshmallow import EXCLUDE
 
 
@@ -29,7 +29,7 @@ class VendorModel(BaseModel):
     rating = db.Column(db.Float(), nullable=True)
 
 
-class VendorSchema(ma.ModelSchema):
+class VendorSchema(BaseSchema):
     class Meta:
         model = VendorModel
         unknown = EXCLUDE
@@ -49,7 +49,7 @@ class VendorProduceModel(BaseModel):
     quantity = db.Column(db.Integer, nullable=False)
 
 
-class VendorProduceSchema(ma.ModelSchema):
+class VendorProduceSchema(BaseSchema):
     class Meta:
         model = VendorProduceModel
         unknown = EXCLUDE
@@ -66,7 +66,7 @@ class MarketVendorModel(BaseModel):
     vendorId = db.Column(db.Integer, nullable=False)
 
 
-class MarketVendorSchema(ma.ModelSchema):
+class MarketVendorSchema(BaseSchema):
     class Meta:
         model = MarketVendorModel
         strict = False
