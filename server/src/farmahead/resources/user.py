@@ -19,13 +19,13 @@ class UserResource(Resource):
     SCHEMA: models.market.UserSchema
 
     /api/user
-    /api/user?id=1
+    /api/user?userName=foobar
     """
 
     @staticmethod
-    def get_one(_id):
-        log.debug(f'Querying UserModel where id={_id}')
-        res = db.session.query(UserModel).filter_by(id=_id).first()
+    def get_one(_userName):
+        log.debug(f'Querying UserModel where userName={_userName}')
+        res = db.session.query(UserModel).filter_by(userName=_userName).first()
         return res
 
     @staticmethod
@@ -36,13 +36,13 @@ class UserResource(Resource):
 
     def get(self):
         # Retrieve existing item(s)
-        _id = request.args.get('id')
-        if not _id:
+        _userName = request.args.get('userName')
+        if not _userName:
             res = self.get_all()
             return reply_success(schemas.dump(res))
-        res = self.get_one(_id)
+        res = self.get_one(_userName)
         if not res:
-            return reply_missing(id=_id)
+            return reply_missing(nonexistant=_userName)
         return reply_success(schema.dump(res))
 
     def post(self):
