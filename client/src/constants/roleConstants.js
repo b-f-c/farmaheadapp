@@ -1,7 +1,3 @@
-const ROLE = {
-  VENDOR: 'vendor',
-  MARKET_ADMIN: 'marketAdmin',
-  SHOPPER: 'shopper',
-}
-
-export default ROLE
+export const VENDOR = 'vendor'
+export const MARKET_ADMIN = 'marketAdmin'
+export const SHOPPER = 'shopper'

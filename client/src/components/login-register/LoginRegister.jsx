@@ -15,6 +15,7 @@ export default (props) => {
 
   const [showLoginModal, toggleLoginModal] = useState(false)
   const [showRegisterModal, toggleRegisterModal] = useState(false)
+  const [accountType, setAccountType] = useState(SHOPPER)
 
   const dispatch = useDispatch()
   const { user } = useSelector(mapStateToProps)
@@ -135,15 +136,37 @@ export default (props) => {
             <Row>
               <Form.Group as={Col} className="d-flex justify-content-center">
                 <Row>
-                  <Button variant="info">
-                    <IoIosCart size={42} />
-                  </Button>
+                  {accountType === SHOPPER ? (
+                    <Button className="shopper-pressed" variant="info">
+                      <IoIosCart size={42} />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="info"
+                      onClick={() => {
+                        setAccountType(SHOPPER)
+                      }}
+                    >
+                      <IoIosCart size={42} />
+                    </Button>
+                  )}
                 </Row>
               </Form.Group>
               <Form.Group as={Col} className="d-flex justify-content-center">
-                <Button variant="success">
-                  <FaTractor size={42} />
-                </Button>
+                {accountType === VENDOR ? (
+                  <Button className="vendor-pressed" variant="success">
+                    <FaTractor size={42} />
+                  </Button>
+                ) : (
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      setAccountType(VENDOR)
+                    }}
+                  >
+                    <FaTractor size={42} />
+                  </Button>
+                )}
               </Form.Group>
             </Row>
             <Row>
