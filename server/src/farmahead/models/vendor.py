@@ -26,6 +26,7 @@ class VendorModel(BaseModel):
 
     snapStatus = db.Column(db.Boolean(), nullable=False)
     s3_url = db.Column(db.String(), nullable=True)
+    rating = db.Column(db.Float(), nullable=True)
 
 
 class VendorSchema(ma.ModelSchema):
@@ -68,5 +69,4 @@ class MarketVendorModel(BaseModel):
 class MarketVendorSchema(ma.ModelSchema):
     class Meta:
         model = MarketVendorModel
-        unknown = EXCLUDE
         strict = False

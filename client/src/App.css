@@ -49,6 +49,26 @@
   margin-right: 2px;
 }
 
+button.shopper-pressed,
+button.shopper-pressed:hover,
+button.shopper-pressed:focus {
+  background: rgb(16, 116, 132);
+  outline: none;
+  -webkit-box-shadow: inset 0 0 5px #c1c1c1;
+  -moz-box-shadow: inset 0 0 5px #c1c1c1;
+  box-shadow: inset 0 0 5px #c1c1c1;
+}
+
+button.vendor-pressed,
+button.vendor-pressed:hover,
+button.vendor-pressed:focus {
+  background: #1b712e;
+  outline: none;
+  -webkit-box-shadow: inset 0 0 5px #c1c1c1;
+  -moz-box-shadow: inset 0 0 5px #c1c1c1;
+  box-shadow: inset 0 0 5px #c1c1c1;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -91,7 +91,7 @@ class MarketByZipResource(Resource):
         # Pass all markets into distance filter
         markets = db.session.query(MarketModel).all()
         locatedMarkets = ZipCodes().locateThings(markets, zipcode, _distance)
-        return reply_success(schemas.dump(locatedMarkets))
+        return reply_success(locatedMarkets)
 
 
 class MarketByProduceResource(Resource):
@@ -119,23 +119,64 @@ class MarketByProduceResource(Resource):
             markets = [{
                         "produceId": id,
                         "marketName": m.marketName,
-                        "marketId": m.id,
-                        "vendorName": v.vendorName,
-                        "vendorId": v.id
+                        "marketId": m.id
                         }
                 for vp, v, mv, m in produceMarkets]
-            return reply_success(markets)
+            dedup = list({v['marketId']: v for v in markets}.values())
+            return reply_success(dedup)
         else:
             markets = [m for vp, v, mv, m in produceMarkets]
             locatedMarkets = ZipCodes().locateThings(markets, _zipcode, _distance)
-            locatedMarketIds = [lm.id for lm in locatedMarkets]
+            locatedMarketIds = [lm['id'] for lm in locatedMarkets]
             returnMarkets = [{
                         "produceId": id,
                         "marketName": m.marketName,
-                        "marketId": m.id,
-                        "vendorName": v.vendorName,
-                        "vendorId": v.id
+                        "marketId": m.id
                         }
                 for vp, v, mv, m in produceMarkets if m.id in locatedMarketIds]
-            return reply_success(returnMarkets)
+            dedup = list({v['marketId']: v for v in returnMarkets}.values())
+            return reply_success(dedup)
 
+
+class  MarketByProduceListResource(Resource):
+    """
+    /api/market/produce/
+    """
+
+    def get(self):
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', type=int, required=True, action='append', ignore=False)
+        parser.add_argument('distance', type=int, ignore=False)
+        parser.add_argument('zipcode', type=int, ignore=False)
+        parser.add_argument('intersect', type=bool, ignore=False)
+        args = parser.parse_args()
+
+        _ids = args['id']
+        _zipcode = args['zipcode']
+        _distance = args['distance']
+        _intersect = args['intersect']
+
+        produceMarkets = db.session().query(VendorProduceModel, VendorModel, MarketVendorModel, MarketModel) \
+            .filter(VendorProduceModel.produceId.in_(_ids)) \
+            .join(VendorModel, VendorProduceModel.vendorId == VendorModel.id) \
+            .join(MarketVendorModel, MarketVendorModel.vendorId == VendorProduceModel.vendorId) \
+            .join(MarketModel, MarketVendorModel.marketId == MarketModel.id)
+
+        if _intersect:
+            allMarkets = []
+            for id in _ids:
+                markets = [m for vp, v, mv, m in produceMarkets if vp.produceId == id]
+                allMarkets.append(markets)
+            markets = list(set.intersection(*map(set, allMarkets)))
+        else:
+            markets = [m for vp, v, mv, m in produceMarkets]
+
+        if _zipcode:
+            markets = ZipCodes().locateThings(markets, int(_zipcode), _distance)
+            dedup = list({v['id']: v for v in markets}.values())
+            return reply_success(dedup)
+
+        # Dedup
+        markets = list({v.id: v for v in markets}.values())
+        return reply_success(schemas.dump(markets))

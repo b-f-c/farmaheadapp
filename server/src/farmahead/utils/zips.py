@@ -4,6 +4,7 @@ from typing import List
 
 import pandas as pd
 from geopy import distance
+import copy
 
 log = logging.getLogger(__name__)
 
@@ -19,8 +20,13 @@ class ZipCodes(object):
             _distance = 50
         try:
             (LAT, LNG) = self.data.loc[zipcode].values
-            thingsWithinRadius = [thing for thing in things if
-                               distance.distance((LAT, LNG), (thing.latitude, thing.longitude)).miles < _distance]
+            unpackaged_things = [copy.copy(thing).__dict__ for thing in things]
+            thingsWithinRadius = []
+            for thing in unpackaged_things:
+                thing.pop('_sa_instance_state', None)
+                thing['distance'] = round(distance.distance((LAT, LNG), (thing['latitude'], thing['longitude'])).miles,3)
+                if thing['distance'] < _distance:
+                    thingsWithinRadius.append(thing)
             return thingsWithinRadius
         except KeyError:
             log.warning("Could not find zipcode: " + str(zipcode))

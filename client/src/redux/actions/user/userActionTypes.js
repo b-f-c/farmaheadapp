@@ -1,0 +1,2 @@
+export const USER_REQUESTED = 'USER_REQUESTED'
+export const USER_RECEIVED = 'USER_RECEIVED'
