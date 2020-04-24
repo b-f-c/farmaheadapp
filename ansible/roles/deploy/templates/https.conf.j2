@@ -42,12 +42,7 @@ server {
     } # managed by Certbot
 
     if ($host = www.{{ hostname }}) {
-	return 301 https://$host$request_uri;
+	    return 301 https://$host$request_uri;
     }
-
-    listen 80;
-    server_name {{ hostname }};
-    return 404; # managed by Certbot
-
 
 }
