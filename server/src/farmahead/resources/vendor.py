@@ -117,34 +117,45 @@ class VendorByProduceResource(Resource):
         vendors = [v for vp, v in produceVendors]
         if _zipcode:
             vendors = ZipCodes().locateThings(vendors, int(_zipcode), _distance)
+            return reply_success(vendors)
         return reply_success(schemas.dump(vendors))
 
 
 class VendorByProduceListResource(Resource):
     """
-    /api/vendor/produce/multiOr
+    /api/vendor/produce/
     """
 
-    def get(self, ids=None):
+    def get(self):
 
         parser = reqparse.RequestParser()
         parser.add_argument('id', type=int, required=True, action='append', ignore=False)
         parser.add_argument('distance', type=int, ignore=False)
         parser.add_argument('zipcode', type=int, ignore=False)
+        parser.add_argument('intersect', type=bool, ignore=False)
         args = parser.parse_args()
 
         _ids = args['id']
         _zipcode = args['zipcode']
         _distance = args['distance']
+        _intersect = args['intersect']
 
         produceVendors = db.session().query(VendorProduceModel, VendorModel) \
             .filter(VendorProduceModel.produceId.in_(_ids)) \
             .join(VendorModel, VendorProduceModel.vendorId == VendorModel.id)
 
-        vendors = [v for vp, v in produceVendors]
+        if _intersect:
+            allVendors = []
+            for id in _ids:
+                vendors = [ v for vp, v in produceVendors if vp.produceId == id ]
+                allVendors.append(vendors)
+            vendors = list(set.intersection(*map(set, allVendors)))
+        else:
+            vendors = [v for vp, v in produceVendors]
 
         if _zipcode:
             vendors = ZipCodes().locateThings(vendors, int(_zipcode), _distance)
+            return reply_success(vendors)
 
         return reply_success(schemas.dump(vendors))
 

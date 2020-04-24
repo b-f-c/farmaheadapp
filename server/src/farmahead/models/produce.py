@@ -17,12 +17,12 @@ class ProduceModel(BaseModel):
 
     produceName = db.Column(db.String(), nullable=False, unique=True)
     produceType = db.Column(db.String())
+    s3_url = db.Column(db.String(), nullable=True)
 
 
 class ProduceSchema(ma.ModelSchema):
     class Meta:
         model = ProduceModel
-        unknown = EXCLUDE
         strict = False
     # no further action is needed unless you want to override default behavior, which if
     # fine 99% of the time unless you need to implement adhoc validation, etc.
