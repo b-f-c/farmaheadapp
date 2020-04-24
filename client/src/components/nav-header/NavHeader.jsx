@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import FlexBox from '../custom/FlexBox'
-import { Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import NavButton from './NavButton'
 

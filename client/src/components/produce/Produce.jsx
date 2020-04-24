@@ -6,16 +6,16 @@ import PageCard from '../page-card'
 import Paginate from '../custom/Paginate'
 
 const mapStateToProps = (state) => ({
-  ...state.markets,
+  ...state.produce,
 })
 
-const renderMarketCard = (market) => {
-	const { marketName, locationAddress } = market
+const renderProduceCard = (produce) => {
+	const { produceName, locationAddress } = produce
 
 	return (
 		<FlexBox shrink>
 			<PageCard
-				title={marketName}
+				title={produceName}
 				stars={Math.random() * 6}
 				address={locationAddress}
 			/>
@@ -23,12 +23,12 @@ const renderMarketCard = (market) => {
 	)
 }
 
-const Market = () => {
-	const { markets = [] } = useSelector(mapStateToProps)
+const Produce = () => {
+	const { produce = [] } = useSelector(mapStateToProps)
 
 	return (
-		<Paginate objects={markets} renderCard={renderMarketCard} />
+		<Paginate objects={produce} renderCard={renderProduceCard} />
 	)
 }
 
-export default Market
+export default Produce

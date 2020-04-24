@@ -9,9 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import LandingPage from './components/landing-page'
 import Market from './components/market'
+import Vendor from './components/vendor'
 import Page from './components/page'
 
 import { MARKET, VENDOR, PRODUCE } from './constants/globalConstants'
+import Produce from './components/produce/Produce'
 
 function App() {
   return (
@@ -30,13 +32,14 @@ function App() {
             </Page>
           </Route>
           <Route path={`/${VENDOR}`}>
-            <Page page={VENDOR} />
+            <Page page={VENDOR}>
+              <Vendor />
+            </Page>
           </Route>
           <Route path={`/${PRODUCE}`}>
-            <Page page={PRODUCE} />
-          </Route>
-					<Route path={`/${PRODUCE}`}>
-            <Page page={PRODUCE} />
+            <Page page={PRODUCE}>
+              <Produce />
+            </Page>
           </Route>
 					<Route>
 						<div style={{color: '#ffffff'}}>

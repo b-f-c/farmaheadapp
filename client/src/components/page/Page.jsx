@@ -5,7 +5,6 @@ import FlexBox from '../custom/FlexBox'
 import NavHeader from '../nav-header'
 
 import { fetchPageInfo } from '../../redux/actions/markets/page/pageActions'
-import { Typeahead } from 'react-bootstrap-typeahead'
 
 export default (props) => {
   const { children, page } = props
@@ -14,7 +13,7 @@ export default (props) => {
   useEffect(() => {
     // Check redux store to see if list is already grabbed. If empty, dispatch action
     dispatch(fetchPageInfo(page))
-  }, [])
+  }, [page])
 
   // Populate Typeahead component with data returned from redux store
   return (
