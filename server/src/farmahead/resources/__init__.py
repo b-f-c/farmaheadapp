@@ -41,6 +41,7 @@ api.add_resource(MarketByProduceResource, '/produce/<int:id>/market')
 # @param: id (id): required, multiple allowed - produce to search by
 # @param: distance (int): optional - radius search with zipcode LAT/LONG
 # @param: zipcode (int): optional - zip code to search by (will use centroid of zipcode)
+# @param: intersect (bool): optional - intersection between produce
 
 api.add_resource(VendorByProduceListResource, '/produce/vendor')
 
@@ -48,5 +49,6 @@ api.add_resource(VendorByProduceListResource, '/produce/vendor')
 # @param: id (id): required, multiple allowed - produce to search by
 # @param: distance (int): optional - radius search with zipcode LAT/LONG
 # @param: zipcode (int): optional - zip code to search by (will use centroid of zipcode)
+# @param: intersect (bool): optional - intersection between produce
 
 api.add_resource(MarketByProduceListResource, '/produce/market')
