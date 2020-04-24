@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import FlexBox from '../custom/FlexBox'
 
+import Filter from '../filter'
+
 const NUM_COLUMNS = 5
 const NUM_ROWS = 2
 
@@ -61,6 +63,7 @@ export default ({objects, renderCard}) => {
 
 	return (
 		<FlexBox style={{ width: '100%', height: '100%'}} direction='column' justify='space-between' align='center'>
+			<Filter />
 			<FlexBox shrink style={{ marginBottom: '24px'}} direction='column' pad={{between: 'medium'}}>
 				{formattedRows}
 			</FlexBox>
