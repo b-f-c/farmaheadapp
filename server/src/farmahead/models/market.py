@@ -49,7 +49,6 @@ class MarketModel(BaseModel):
 class MarketSchema(ma.ModelSchema):
     class Meta:
         model = MarketModel
-        unknown = EXCLUDE
         strict = False
     # no further action is needed unless you want to override default behavior, which if
     # fine 99% of the time unless you need to implement adhoc validation, etc.

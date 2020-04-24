@@ -68,5 +68,4 @@ class MarketVendorModel(BaseModel):
 class MarketVendorSchema(ma.ModelSchema):
     class Meta:
         model = MarketVendorModel
-        unknown = EXCLUDE
         strict = False
