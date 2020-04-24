@@ -14,7 +14,7 @@ export default (props) => {
   useEffect(() => {
     // Check redux store to see if list is already grabbed. If empty, dispatch action
     dispatch(fetchPageInfo(page))
-  }, [])
+  }, [page])
 
   // Populate Typeahead component with data returned from redux store
   return (
