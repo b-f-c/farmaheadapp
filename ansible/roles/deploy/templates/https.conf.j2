@@ -5,6 +5,7 @@ server {
     ## React
     location / {
         root {{ nginx_build_path }}; #(path to JS build)
+        try_files $uri /index.html;
     }
 
     ## Flask
