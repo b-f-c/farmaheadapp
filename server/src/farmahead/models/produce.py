@@ -1,7 +1,7 @@
 import logging
 
 log = logging.getLogger(__name__)
-from .base import db, ma, BaseModel
+from .base import db, BaseModel, BaseSchema
 from marshmallow import EXCLUDE
 
 """
@@ -20,7 +20,7 @@ class ProduceModel(BaseModel):
     s3_url = db.Column(db.String(), nullable=True)
 
 
-class ProduceSchema(ma.ModelSchema):
+class ProduceSchema(BaseSchema):
     class Meta:
         model = ProduceModel
         strict = False

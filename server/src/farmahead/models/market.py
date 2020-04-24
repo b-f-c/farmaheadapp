@@ -1,5 +1,5 @@
 import logging; log=logging.getLogger(__name__)
-from .base import db, ma, BaseModel
+from .base import db, BaseModel, BaseSchema
 from marshmallow import EXCLUDE
 
 """
@@ -48,7 +48,7 @@ class MarketModel(BaseModel):
     rating = db.Column(db.Float(), nullable=True)
 
 
-class MarketSchema(ma.ModelSchema):
+class MarketSchema(BaseSchema):
     class Meta:
         model = MarketModel
         strict = False
