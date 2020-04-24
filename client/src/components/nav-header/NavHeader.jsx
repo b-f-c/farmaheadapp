@@ -2,14 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import FlexBox from '../custom/FlexBox'
-import { Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+
+import NavButton from './NavButton'
 
 import { IoIosLeaf } from 'react-icons/io'
 import { MARKET, VENDOR, PRODUCE } from '../../constants/globalConstants'
 
 const NavHeader = styled.div`
-  width: 100%;
+	width: 100%;
+	height: 62px;
   max-height: 62px;
 
   display: flex;
@@ -31,26 +32,21 @@ export default () => {
         direction="row"
         style={{ paddingLeft: '12px' }}
       >
-        <IoIosLeaf size={'1.2em'} color={'#27ae60'} />
-        <FlexBox style={{ fontSize: '1.5em', paddingLeft: '4px' }}>
+        <IoIosLeaf size={'1.32em'} color={'#27ae60'} />
+        <FlexBox style={{ fontSize: '1.7em', paddingLeft: '4px' }}>
           <b>Farm</b>Ahead
         </FlexBox>
       </FlexBox>
       <FlexBox
         justify="center"
         align="center"
-        direction="row"
-        style={{ paddingLeft: '12px', height: '95%' }}
+				direction="row"
+				pad={{between: 'small'}}
+        style={{ paddingLeft: '20px', height: '100%' }}
       >
-        <LinkContainer to={MARKET}>
-          <Button className='Nav-buttons' variant='outline-success'>Markets</Button>
-        </LinkContainer>
-        <LinkContainer to={VENDOR}>
-          <Button className='Nav-buttons' variant='outline-success'>Vendors</Button>
-        </LinkContainer>
-        <LinkContainer to={PRODUCE}>
-          <Button className='Nav-buttons' variant='outline-success'>Produce</Button>
-        </LinkContainer>
+        <NavButton destination={MARKET} title={'Markets'}/>
+				<NavButton destination={VENDOR} title={'Vendors'}/>
+				<NavButton destination={PRODUCE} title={'Produce'}/>
       </FlexBox>
     </NavHeader>
   )

@@ -5,7 +5,6 @@ import FlexBox from '../custom/FlexBox'
 import NavHeader from '../nav-header'
 
 import { fetchPageInfo } from '../../redux/actions/markets/page/pageActions'
-import { Typeahead } from 'react-bootstrap-typeahead'
 
 export default (props) => {
   const { children, page } = props
@@ -20,10 +19,9 @@ export default (props) => {
   return (
     <FlexBox direction="column" style={{ width: '100%', height: '100%' }}>
       <NavHeader />
-      {/* <Typeahead
-
-			/> */}
-      <FlexBox style={{ padding: '12px 12px 12px 12px' }}>{children}</FlexBox>
+      <FlexBox grow style={{ padding: '24px', width: '100%' }}>
+				{children}
+			</FlexBox>
     </FlexBox>
   )
 }

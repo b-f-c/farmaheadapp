@@ -32,13 +32,20 @@ function App() {
             </Page>
           </Route>
           <Route path={`/${VENDOR}`}>
-            <Page page={VENDOR} />
+            <Page page={VENDOR}>
               <Vendor />
+            </Page>
           </Route>
           <Route path={`/${PRODUCE}`}>
-            <Page page={PRODUCE} />
+            <Page page={PRODUCE}>
               <Produce />
+            </Page>
           </Route>
+					<Route>
+						<div style={{color: '#ffffff'}}>
+							404
+						</div>
+					</Route>
         </Switch>
       </div>
     </Router>

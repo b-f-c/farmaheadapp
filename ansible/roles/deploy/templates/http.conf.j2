@@ -1,11 +1,12 @@
 server {
     listen 80;
-    server_name 127.0.0.1;
+    server_name {{ hostname }};
     index index.html;
     
     ## React
     location / {
         root {{ nginx_build_path }}; #(path to JS build)
+        try_files $uri /index.html;
     }
 
     ## Flask

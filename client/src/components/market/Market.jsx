@@ -1,40 +1,34 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { v4 } from 'uuid'
-import { Col, Row } from 'react-bootstrap'
-
+import FlexBox from '../custom/FlexBox'
 import PageCard from '../page-card'
+import Paginate from '../custom/Paginate'
 
 const mapStateToProps = (state) => ({
   ...state.markets,
 })
 
-const ROW_SIZE = 6
+const renderMarketCard = (market) => {
+	const { marketName, locationAddress } = market
+
+	return (
+		<FlexBox shrink>
+			<PageCard
+				title={marketName}
+				stars={Math.random() * 6}
+				address={locationAddress}
+			/>
+		</FlexBox>
+	)
+}
 
 const Market = () => {
-  const { markets } = useSelector(mapStateToProps)
+	const { markets = [] } = useSelector(mapStateToProps)
 
-  const marketCards = []
-  markets.forEach((market, idx) => {
-    const { marketName, locationAddress } = market
-    marketCards.push(
-      <Col key={v4()}>
-        <PageCard
-          title={marketName}
-          stars={Math.random() * 6}
-          address={locationAddress}
-        />
-      </Col>
-    )
-
-    // Every 4th item render a full sized div to separate items
-    if ((idx + 1) % ROW_SIZE === 0) {
-      marketCards.push(<div key={v4()} className="w-100" />)
-    }
-  })
-
-  return <Row>{marketCards}</Row>
+	return (
+		<Paginate objects={markets} renderCard={renderMarketCard} />
+	)
 }
 
 export default Market
