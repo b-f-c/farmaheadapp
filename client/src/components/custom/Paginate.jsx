@@ -5,6 +5,8 @@ import FlexBox from './FlexBox'
 
 import Filter from '../filter'
 
+import { PRODUCE } from '../../constants/globalConstants'
+
 const NUM_COLUMNS = 5
 const NUM_ROWS = 2
 
@@ -76,7 +78,7 @@ export default ({ objects, renderCard, page }) => {
       justify="space-between"
       align="center"
     >
-      <Filter page={page} />
+      {page !== PRODUCE ? <Filter page={page} /> : null}
       <FlexBox
         shrink
         style={{ marginBottom: '24px' }}
