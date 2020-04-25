@@ -1,4 +1,10 @@
 ---
+# free up resources before we install
+- name: Stop systemd app service during install (free up resources)
+  systemd:
+    name: gunicorn.service
+    state: stopped
+
   # fetch source code and install
 - name: Clone source repository
   git:
@@ -62,6 +68,15 @@
     mode: 0755
     owner: root
     group: root
+
+- name: Ensure build directory is actually present
+  stat: 
+    path: "{{ nginx_build_path }}"
+  register: file_details
+
+- fail:
+    msg: The NPM build directory is missing from "{{ nginx_build_path }}"
+  when: file_details.stat.isdir == false
 
 ## RICK ROLL ##
 # - name: Copy index.html to html
