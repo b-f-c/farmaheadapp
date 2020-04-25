@@ -10,25 +10,24 @@ const mapStateToProps = (state) => ({
 })
 
 const renderVendorCard = (vendor) => {
-	const { vendorName, locationAddress } = vendor
+  const { vendorName, locationAddress, s3_url } = vendor
 
-	return (
-		<FlexBox shrink>
-			<PageCard
-				title={vendorName}
-				stars={Math.random() * 6}
-				address={locationAddress}
-			/>
-		</FlexBox>
-	)
+  return (
+    <FlexBox shrink>
+      <PageCard
+        title={vendorName}
+        stars={Math.random() * 5}
+        address={locationAddress}
+        imgSrc={s3_url}
+      />
+    </FlexBox>
+  )
 }
 
 const Vendor = () => {
-	const { vendors = [] } = useSelector(mapStateToProps)
+  const { vendors = [] } = useSelector(mapStateToProps)
 
-	return (
-		<Paginate objects={vendors} renderCard={renderVendorCard} />
-	)
+  return <Paginate objects={vendors} renderCard={renderVendorCard} />
 }
 
 export default Vendor

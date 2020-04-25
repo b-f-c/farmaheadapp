@@ -7,6 +7,8 @@ import { IoIosCart } from 'react-icons/all'
 
 import { fetchUserData } from '../../redux/actions/user/userActions'
 import { SHOPPER, VENDOR } from '../../constants/roleConstants'
+import { Redirect } from 'react-router'
+import { ADMIN } from '../../constants/globalConstants'
 
 const mapStateToProps = (state) => ({ ...state.user })
 
@@ -18,7 +20,7 @@ export default (props) => {
   const [accountType, setAccountType] = useState(SHOPPER)
 
   const dispatch = useDispatch()
-  const { user } = useSelector(mapStateToProps)
+  const { loggedIn } = useSelector(mapStateToProps)
 
   const submitLogin = (e) => {
     e.preventDefault()
