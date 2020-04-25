@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styled from 'styled-components'
 import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io'
 
 import FlexBox from '../custom/FlexBox'
+import { Button } from 'react-bootstrap'
+import { FaPlus } from 'react-icons/all'
 
 const BRAND_COLOR = '#27ae60'
 
@@ -44,7 +46,7 @@ const Stars = ({ quantity }) => {
 }
 
 export default (props) => {
-  const { title, address, stars, imgSrc } = props
+  const { title, address, stars, imgSrc, canAddToCart } = props
 
   return (
     <Card>
@@ -73,6 +75,13 @@ export default (props) => {
           {stars ? <Stars quantity={stars} /> : null}
           <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
         </FlexBox>
+        {canAddToCart ? (
+          <FlexBox className="pr-2" style={{ margin: 'auto 0px auto auto' }}>
+            <Button variant="outline-info">
+              <FaPlus />
+            </Button>
+          </FlexBox>
+        ) : null}
       </FlexBox>
     </Card>
   )

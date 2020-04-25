@@ -15,7 +15,12 @@ export const renderProduceCard = (produce) => {
 
   return (
     <FlexBox shrink>
-      <PageCard title={produceName} address={produceType} imgSrc={s3_url} />
+      <PageCard
+        title={produceName}
+        address={produceType}
+        imgSrc={s3_url}
+        canAddToCart={true}
+      />
     </FlexBox>
   )
 }
