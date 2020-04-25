@@ -2,13 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
+import { IoIosLeaf } from 'react-icons/io'
 import FlexBox from '../custom/FlexBox'
 import LoginRegister from '../login-register'
 
 import NavButton from './NavButton'
-import { IoIosLeaf } from 'react-icons/io'
 import { MARKET, VENDOR, PRODUCE, ADMIN } from '../../constants/globalConstants'
-import { SHOPPER } from '../../constants/roleConstants'
 
 const NavHeader = styled.div`
   width: 100%;
