@@ -121,6 +121,29 @@ class VendorByProduceResource(Resource):
         return reply_success(schemas.dump(vendors))
 
 
+class VendorByZipResource(Resource):
+    """
+    TABLE:  vendor
+    MODEL:  models.market.VendorModel
+    SCHEMA: models.market.VendorSchema
+
+    /api/vendor/zipcode/{zipcode}
+    """
+
+    def get(self, zipcode=None):
+        parser = reqparse.RequestParser()
+        parser.add_argument('zipcode', type=int, ignore=False)
+        args = parser.parse_args()
+
+        _distance = args.get('distance')
+
+        # Pass all markets into distance filter
+        vendors = db.session.query(VendorModel).all()
+        locatedVendors = ZipCodes().locateThings(vendors, zipcode, _distance)
+        return reply_success(locatedVendors)
+
+
+
 class VendorByProduceListResource(Resource):
     """
     /api/vendor/produce/
