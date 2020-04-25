@@ -1,12 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import {
-  IoMdCamera,
-  IoMdStar,
-  IoMdStarHalf,
-  IoMdStarOutline,
-} from 'react-icons/io'
+import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io'
 
 import FlexBox from '../custom/FlexBox'
 
@@ -20,7 +15,6 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
 
   width: 300px;
-  height: 350px;
 
   transition: padding-bottom 0.2s;
 
@@ -71,12 +65,12 @@ export default (props) => {
           />
         </div>
       </FlexBox>
-      <FlexBox style={{ height: '40%' }} align="flex-end" margin="small">
+      <FlexBox align="flex-end" margin="small">
         <FlexBox direction="column" style={{ padding: '12px' }}>
           <FlexBox>
             <b>{title}</b>
           </FlexBox>
-          <Stars quantity={stars} />
+          {stars ? <Stars quantity={stars} /> : null}
           <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
         </FlexBox>
       </FlexBox>

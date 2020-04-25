@@ -11,16 +11,11 @@ const mapStateToProps = (state) => ({
 })
 
 export const renderProduceCard = (produce) => {
-  const { produceName, locationAddress, s3_url } = produce
+  const { produceName, produceType, s3_url } = produce
 
   return (
     <FlexBox shrink>
-      <PageCard
-        title={produceName}
-        stars={Math.random() * 5}
-        address={locationAddress}
-        imgSrc={s3_url}
-      />
+      <PageCard title={produceName} address={produceType} imgSrc={s3_url} />
     </FlexBox>
   )
 }

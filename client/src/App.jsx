@@ -27,22 +27,19 @@ function App() {
           <Route path={`/${VENDOR}/${ADMIN}`}>
             <VendorAdmin />
           </Route>
-          <Route path="/login">
-            <LandingPage />
-          </Route>
-          <Route path={`/${MARKET}`}>
+          <Route exact path={`/${MARKET}`}>
             <Page page={MARKET}>
               <Market />
             </Page>
           </Route>
-          <Route path={`/${VENDOR}`}>
-            <Page page={VENDOR}>
-              <Vendor />
-            </Page>
-          </Route>
-          <Route path={`/${PRODUCE}`}>
+          <Route exact path={`/${PRODUCE}`}>
             <Page page={PRODUCE}>
               <Produce />
+            </Page>
+          </Route>
+          <Route exact path={`/${VENDOR}`}>
+            <Page page={VENDOR}>
+              <Vendor />
             </Page>
           </Route>
           <Route>

@@ -77,7 +77,6 @@ export default (props) => {
             </Button>
           </Modal.Footer>
         </Form>
-        {loggedIn ? <Redirect to={`/${VENDOR}/${ADMIN}`} /> : null}
       </Modal>
 
       <Modal show={showRegisterModal} onHide={toggleRegisterModal}>

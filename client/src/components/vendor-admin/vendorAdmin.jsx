@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
 import NavHeader from '../nav-header'
-import PageCard from '../page-card'
-import { fetchProduceByVendor } from '../../redux/actions/produce/produceActions'
 import Paginate from '../custom/Paginate'
+import { fetchProduceByVendor } from '../../redux/actions/produce/produceActions'
 import { renderProduceCard } from '../produce/Produce'
 
 const mapStateToProps = (state) => ({
@@ -25,7 +24,7 @@ const VendorAdmin = () => {
       <NavHeader />
       <Container>
         <Row>
-          <Col>
+          <Col className="py-3">
             <h3>Manage your markets</h3>
           </Col>
           <Col>
