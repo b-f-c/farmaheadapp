@@ -5,7 +5,7 @@ import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io'
 
 import FlexBox from '../custom/FlexBox'
 import { Button } from 'react-bootstrap'
-import { FaPlus } from 'react-icons/all'
+import { FaPlus, FaCheck } from 'react-icons/all'
 
 const BRAND_COLOR = '#27ae60'
 
@@ -46,7 +46,15 @@ const Stars = ({ quantity }) => {
 }
 
 export default (props) => {
-  const { title, address, stars, imgSrc, canAddToCart } = props
+  const {
+    title,
+    address,
+    stars,
+    imgSrc,
+    canAddToCart,
+    canBeSnapEligible,
+    snapStatus,
+  } = props
 
   return (
     <Card>
@@ -69,17 +77,30 @@ export default (props) => {
       </FlexBox>
       <FlexBox align="flex-end" margin="small">
         <FlexBox direction="column" style={{ padding: '12px' }}>
-          <FlexBox>
-            <b>{title}</b>
+          <FlexBox style={{ maxWidth: '150px' }}>
+            <b className="text-truncate">{title}</b>
           </FlexBox>
           {stars ? <Stars quantity={stars} /> : null}
-          <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
+          <FlexBox style={{ color: '#737373', maxWidth: '150px' }}>
+            <div className="text-truncate">{address}</div>
+          </FlexBox>
         </FlexBox>
         {canAddToCart ? (
           <FlexBox className="pr-2" style={{ margin: 'auto 0px auto auto' }}>
             <Button variant="outline-info">
               <FaPlus />
             </Button>
+          </FlexBox>
+        ) : null}
+        {canBeSnapEligible && snapStatus ? (
+          <FlexBox
+            direction="column"
+            align="center"
+            className="pr-2"
+            style={{ margin: 'auto 0px auto auto' }}
+          >
+            <FlexBox> Snap eligible</FlexBox>
+            <FaCheck className="text-success" />
           </FlexBox>
         ) : null}
       </FlexBox>

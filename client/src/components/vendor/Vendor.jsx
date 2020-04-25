@@ -10,15 +10,17 @@ const mapStateToProps = (state) => ({
 })
 
 const renderVendorCard = (vendor) => {
-  const { vendorName, locationAddress, s3_url } = vendor
+  const { vendorName, locationAddress, s3_url, snapStatus, rating } = vendor
 
   return (
     <FlexBox shrink>
       <PageCard
         title={vendorName}
-        stars={Math.random() * 5}
+        stars={rating}
         address={locationAddress}
         imgSrc={s3_url}
+        snapStatus={snapStatus}
+        canBeSnapEligible={true}
       />
     </FlexBox>
   )

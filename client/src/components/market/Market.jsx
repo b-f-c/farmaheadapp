@@ -10,15 +10,17 @@ const mapStateToProps = (state) => ({
 })
 
 const renderMarketCard = (market) => {
-  const { marketName, locationAddress, s3_url } = market
+  const { marketName, locationAddress, s3_url, snapStatus, rating } = market
 
   return (
     <FlexBox shrink>
       <PageCard
         title={marketName}
-        stars={Math.random() * 5}
+        stars={rating}
         address={locationAddress}
         imgSrc={s3_url}
+        canBeSnapEligible={true}
+        snapStatus={snapStatus}
       />
     </FlexBox>
   )
