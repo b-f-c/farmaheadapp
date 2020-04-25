@@ -53,7 +53,7 @@ export default () => {
         <NavButton destination={`/${MARKET}`} title={'Markets'} />
         <NavButton destination={`/${VENDOR}`} title={'Vendors'} />
         <NavButton destination={`/${PRODUCE}`} title={'Produce'} />
-        {loggedIn && userData.role === SHOPPER ? (
+        {loggedIn && userData.role === VENDOR ? (
           <NavButton destination={`/${VENDOR}/${ADMIN}`} title="My Profile" />
         ) : null}
       </FlexBox>
