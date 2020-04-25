@@ -4,11 +4,11 @@ import styled from 'styled-components'
 
 import FlexBox from '../custom/FlexBox'
 import LoginRegister from '../login-register'
+import ShoppingCart from '../shopping-cart'
 
 import NavButton from './NavButton'
 import { IoIosLeaf } from 'react-icons/io'
 import { MARKET, VENDOR, PRODUCE, ADMIN } from '../../constants/globalConstants'
-import { SHOPPER } from '../../constants/roleConstants'
 
 const NavHeader = styled.div`
   width: 100%;
@@ -57,7 +57,9 @@ export default () => {
           <NavButton destination={`/${VENDOR}/${ADMIN}`} title="My Profile" />
         ) : null}
       </FlexBox>
-      {userData && Object.keys(userData).length ? null : (
+      {userData && Object.keys(userData).length ? (
+        <ShoppingCart style={{ marginLeft: 'auto' }} />
+      ) : (
         <LoginRegister style={{ marginLeft: 'auto' }} />
       )}
     </NavHeader>
