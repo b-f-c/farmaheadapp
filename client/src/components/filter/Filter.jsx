@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Form, Button } from 'react-bootstrap'
+import FlexBox from '../custom/FlexBox'
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css'
 import RangeSlider from 'react-bootstrap-range-slider'
 
@@ -34,24 +35,35 @@ export default (props) => {
   }
 
   return (
-    <Form validated={validated} onSubmit={handleSubmit}>
-      <Form.Row>
-        <Form.Group md="3" controlId="zipCode">
-          <Form.Control type="text" placeholder="Filter by zip code" required />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid zip.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group md="3" controlId="slider">
-          <Form.Label>Distance (in miles)</Form.Label>
-          <RangeSlider
-            inputProps={{ id: 'slider' }}
-            value={sliderValue}
-            onChange={sliderChangeHandler}
-          />
-        </Form.Group>
-        <Button type="submit">Submit form</Button>
-      </Form.Row>
-    </Form>
+    <FlexBox>
+      <Form validated={validated} onSubmit={handleSubmit}>
+        <Form.Row>
+          <Form.Group
+            md="3"
+            controlId="zipCode"
+            style={{ marginRight: '10px' }}
+          >
+            <Form.Control
+              type="text"
+              placeholder="Filter by zip code"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid zip.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="slider">
+            <RangeSlider
+              inputProps={{ id: 'slider' }}
+              value={sliderValue}
+              onChange={sliderChangeHandler}
+              min={0}
+              max={50}
+            />
+          </Form.Group>
+        </Form.Row>
+        <Button type="submit">Filter Distance</Button>
+      </Form>
+    </FlexBox>
   )
 }
