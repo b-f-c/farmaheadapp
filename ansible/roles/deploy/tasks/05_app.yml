@@ -1,10 +1,4 @@
 ---
-# free up resources before we install
-- name: Stop systemd app service during install (free up resources)
-  systemd:
-    name: gunicorn.service
-    state: stopped
-
   # fetch source code and install
 - name: Clone source repository
   git:
