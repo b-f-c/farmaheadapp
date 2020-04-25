@@ -2,12 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
+import { IoIosLeaf } from 'react-icons/io'
 import FlexBox from '../custom/FlexBox'
 import LoginRegister from '../login-register'
+import ShoppingCart from '../shopping-cart'
 
 import NavButton from './NavButton'
-import { IoIosLeaf } from 'react-icons/io'
-import { MARKET, VENDOR, PRODUCE } from '../../constants/globalConstants'
+import { MARKET, VENDOR, PRODUCE, ADMIN } from '../../constants/globalConstants'
 
 const NavHeader = styled.div`
   width: 100%;
@@ -27,7 +28,7 @@ const NavHeader = styled.div`
 const mapStateToProps = (state) => ({ ...state.user })
 
 export default () => {
-  const { user } = useSelector(mapStateToProps)
+  const { loggedIn, userData } = useSelector(mapStateToProps)
 
   return (
     <NavHeader>
@@ -49,11 +50,16 @@ export default () => {
         pad={{ between: 'small' }}
         style={{ paddingLeft: '20px', height: '100%' }}
       >
-        <NavButton destination={MARKET} title={'Markets'} />
-        <NavButton destination={VENDOR} title={'Vendors'} />
-        <NavButton destination={PRODUCE} title={'Produce'} />
+        <NavButton destination={`/${MARKET}`} title={'Markets'} />
+        <NavButton destination={`/${VENDOR}`} title={'Vendors'} />
+        <NavButton destination={`/${PRODUCE}`} title={'Produce'} />
+        {loggedIn && userData.role === VENDOR ? (
+          <NavButton destination={`/${VENDOR}/${ADMIN}`} title="My Profile" />
+        ) : null}
       </FlexBox>
-      {user && Object.keys(user).length ? null : (
+      {userData && Object.keys(userData).length ? (
+        <ShoppingCart style={{ marginLeft: 'auto' }} />
+      ) : (
         <LoginRegister style={{ marginLeft: 'auto' }} />
       )}
     </NavHeader>

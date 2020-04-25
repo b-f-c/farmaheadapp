@@ -42,6 +42,7 @@ const paginatorIcons = (objects, offset, setOffset) => {
 }
 
 export default ({ objects, renderCard, page }) => {
+  if (!objects) return null
   const [offset, setOffset] = useState(0)
 
   const itemsPerPage = NUM_COLUMNS * NUM_ROWS

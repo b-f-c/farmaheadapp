@@ -1,14 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styled from 'styled-components'
-import {
-  IoMdCamera,
-  IoMdStar,
-  IoMdStarHalf,
-  IoMdStarOutline,
-} from 'react-icons/io'
+import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from 'react-icons/io'
 
 import FlexBox from '../custom/FlexBox'
+import { Button } from 'react-bootstrap'
+import { FaPlus } from 'react-icons/all'
 
 const BRAND_COLOR = '#27ae60'
 
@@ -20,13 +17,12 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
 
   width: 300px;
-	height: 350px;
-	
-	transition: padding-bottom 0.2s;
 
-	&:hover {
-		padding-bottom: 15px;
-	}
+  transition: padding-bottom 0.2s;
+
+  &:hover {
+    padding-bottom: 15px;
+  }
 `
 
 const Stars = ({ quantity }) => {
@@ -50,7 +46,7 @@ const Stars = ({ quantity }) => {
 }
 
 export default (props) => {
-  const { title, address, stars } = props
+  const { title, address, stars, imgSrc, canAddToCart } = props
 
   return (
     <Card>
@@ -59,18 +55,33 @@ export default (props) => {
         align="center"
         style={{
           borderBottom: '1px solid #d9d9d9',
-          height: '70%',
+          height: '60%',
           backgroundColor: '#e6e6e6',
         }}
       >
-        <IoMdCamera color="#939393" size="2.5em" />
+        <div>
+          <img
+            className="rounded img-fluid overflow-hidden"
+            src={imgSrc}
+            alt={title}
+          />
+        </div>
       </FlexBox>
-      <FlexBox margin="small">
-        <FlexBox direction="column" style={{padding: '12px'}}>
-          <FlexBox><b>{title}</b></FlexBox>
-          <Stars quantity={stars} />
+      <FlexBox align="flex-end" margin="small">
+        <FlexBox direction="column" style={{ padding: '12px' }}>
+          <FlexBox>
+            <b>{title}</b>
+          </FlexBox>
+          {stars ? <Stars quantity={stars} /> : null}
           <FlexBox style={{ color: '#737373' }}>{address}</FlexBox>
         </FlexBox>
+        {canAddToCart ? (
+          <FlexBox className="pr-2" style={{ margin: 'auto 0px auto auto' }}>
+            <Button variant="outline-info">
+              <FaPlus />
+            </Button>
+          </FlexBox>
+        ) : null}
       </FlexBox>
     </Card>
   )

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -11,15 +12,16 @@ const mapStateToProps = (state) => ({
   ...state.produce,
 })
 
-const renderProduceCard = (produce) => {
-  const { produceName, locationAddress, uuid } = produce
+export const renderProduceCard = (produce) => {
+  const { produceName, produceType, s3_url } = produce
 
   return (
     <FlexBox shrink>
       <PageCard
         title={produceName}
-        stars={Math.random() * 6}
-        address={locationAddress}
+        address={produceType}
+        imgSrc={s3_url}
+        canAddToCart={true}
       />
     </FlexBox>
   )

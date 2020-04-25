@@ -86,7 +86,8 @@ class ProduceByVendorResource(Resource):
                     "produceId": vp.produceId,
                     "quantity": vp.quantity,
                     "produceName": p.produceName,
-                    "produceType": p.produceType
+                    "produceType": p.produceType,
+                    "s3_url": p.s3_url
                     }
             for vp, p in vendorProduce]
         if not produce:

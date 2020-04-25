@@ -12,8 +12,9 @@ import Market from './components/market'
 import Vendor from './components/vendor'
 import Page from './components/page'
 
-import { MARKET, VENDOR, PRODUCE } from './constants/globalConstants'
+import { MARKET, VENDOR, PRODUCE, ADMIN } from './constants/globalConstants'
 import Produce from './components/produce/Produce'
+import VendorAdmin from './components/vendor-admin'
 
 function App() {
   return (
@@ -23,29 +24,27 @@ function App() {
           <Route exact path="/">
             <Redirect to={`/${MARKET}`} />
           </Route>
-          <Route path="/login">
-            <LandingPage />
+          <Route path={`/${VENDOR}/${ADMIN}`}>
+            <VendorAdmin />
           </Route>
-          <Route path={`/${MARKET}`}>
+          <Route exact path={`/${MARKET}`}>
             <Page page={MARKET}>
               <Market />
             </Page>
           </Route>
-          <Route path={`/${VENDOR}`}>
-            <Page page={VENDOR}>
-              <Vendor />
-            </Page>
-          </Route>
-          <Route path={`/${PRODUCE}`}>
+          <Route exact path={`/${PRODUCE}`}>
             <Page page={PRODUCE}>
               <Produce />
             </Page>
           </Route>
-					<Route>
-						<div style={{color: '#ffffff'}}>
-							404
-						</div>
-					</Route>
+          <Route exact path={`/${VENDOR}`}>
+            <Page page={VENDOR}>
+              <Vendor />
+            </Page>
+          </Route>
+          <Route>
+            <div style={{ color: '#ffffff' }}>404</div>
+          </Route>
         </Switch>
       </div>
     </Router>
