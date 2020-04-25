@@ -5,6 +5,8 @@ import FlexBox from '../custom/FlexBox'
 import PageCard from '../page-card'
 import Paginate from '../custom/Paginate'
 
+import { MARKET } from '../../constants/globalConstants'
+
 const mapStateToProps = (state) => ({
   ...state.markets,
 })
@@ -29,7 +31,9 @@ const renderMarketCard = (market) => {
 const Market = () => {
   const { markets = [] } = useSelector(mapStateToProps)
 
-  return <Paginate objects={markets} renderCard={renderMarketCard} />
+  return (
+    <Paginate page={MARKET} objects={markets} renderCard={renderMarketCard} />
+  )
 }
 
 export default Market
