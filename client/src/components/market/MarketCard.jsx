@@ -1,5 +1,5 @@
 import FlexBox from '../custom/FlexBox'
-import { VENDOR } from '../../constants/globalConstants'
+import { MARKET, VENDOR } from '../../constants/globalConstants'
 import PageCard from '../page-card'
 import React from 'react'
 import { withRouter } from 'react-router'
@@ -12,7 +12,7 @@ const MarketCard = (props) => {
     <FlexBox
       shrink
       onClick={() => {
-        history.push(`/${VENDOR}/${id}`)
+        history.push(`/${MARKET}/${id}/${VENDOR}`)
       }}
     >
       <PageCard

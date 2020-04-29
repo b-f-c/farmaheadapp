@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 
 import FlexBox from '../custom/FlexBox'
 import PageCard from '../page-card'
-import { PRODUCE } from '../../constants/globalConstants'
+import { PRODUCE, VENDOR } from '../../constants/globalConstants'
 
 const VendorCard = (props) => {
   const { obj, history } = props
@@ -13,7 +13,7 @@ const VendorCard = (props) => {
     <FlexBox
       shrink
       onClick={() => {
-        history.push(`/${PRODUCE}/${id}`)
+        history.push(`/${VENDOR}/${id}/${PRODUCE}`)
       }}
     >
       <PageCard
