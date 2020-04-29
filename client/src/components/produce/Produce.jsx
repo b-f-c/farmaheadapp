@@ -10,8 +10,8 @@ const mapStateToProps = (state) => ({
   ...state.produce,
 })
 
-export const renderProduceCard = (produce) => {
-  const { produceName, produceType, s3_url } = produce
+export const renderProduceCard = (props) => {
+  const { produceName, produceType, s3_url } = props.obj
 
   return (
     <FlexBox shrink>

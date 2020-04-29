@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import FlexBox from '../custom/FlexBox'
+import FlexBox from './FlexBox'
 
 const NUM_COLUMNS = 5
 const NUM_ROWS = 2
@@ -56,7 +56,9 @@ export default ({ objects, renderCard }) => {
         rows.push([])
       }
 
-      rows[rows.length - 1].push(<FlexBox shrink>{renderCard(obj)}</FlexBox>)
+      rows[rows.length - 1].push(
+        <FlexBox shrink>{React.createElement(renderCard, { obj })}</FlexBox>
+      )
     })
 
   const formattedRows = rows.map((row) => {
