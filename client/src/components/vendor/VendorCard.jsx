@@ -3,15 +3,20 @@ import { withRouter } from 'react-router'
 
 import FlexBox from '../custom/FlexBox'
 import PageCard from '../page-card'
+import { PRODUCE } from '../../constants/globalConstants'
 
 const VendorCard = (props) => {
   const { obj, history } = props
   const { id, vendorName, locationAddress, s3_url, snapStatus, rating } = obj
 
   return (
-    <FlexBox shrink>
+    <FlexBox
+      shrink
+      onClick={() => {
+        history.push(`/${PRODUCE}/${id}`)
+      }}
+    >
       <PageCard
-        id={id}
         title={vendorName}
         stars={rating}
         address={locationAddress}

@@ -16,7 +16,6 @@ const MarketCard = (props) => {
       }}
     >
       <PageCard
-        id={id}
         title={marketName}
         stars={rating}
         address={locationAddress}
